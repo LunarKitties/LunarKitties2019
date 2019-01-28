@@ -11,12 +11,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveWithController;
+import frc.robot.commands.drivetrain.DriveWithController;;
 
 /**
  * Pretty Simple. It is the Drivetrain.
@@ -42,24 +40,6 @@ public class DriveTrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new DriveWithController());
-  }
-
-  /**
-   * Controls drivetrain using Xbox Controller
-   * @param xbox XboxController Object
-   */
-  public void runWithController(XboxController xbox) {
-
-    //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
-    double lt = xbox.getTriggerAxis(Hand.kLeft);
-    double rt = xbox.getTriggerAxis(Hand.kRight);
-    double speed = lt - rt;
-
-    //To Rotate you use the Right Joystick X Axis
-    double rotate = xbox.getX(Hand.kRight);
-
-    //Drive the Robot
-    run(speed,rotate);
   }
 
   /**

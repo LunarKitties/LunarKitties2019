@@ -5,8 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.drivetrain;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -23,8 +25,21 @@ public class DriveWithController extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.mDriveTrain.runWithController(Robot.m_oi.getXboxController1());
-  }
+
+    //Get Controller 1
+    XboxController xbox = Robot.m_oi.getXboxController1();
+
+    //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
+    double lt = xbox.getTriggerAxis(Hand.kLeft);
+    double rt = xbox.getTriggerAxis(Hand.kRight);
+    double speed = lt - rt;
+
+    //To Rotate you use the Right Joystick X Axis
+    double rotate = xbox.getX(Hand.kRight);
+
+    //Drive the Robot
+    Robot.mDriveTrain.run(speed,rotate);
+  }  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

@@ -16,21 +16,25 @@ package frc.robot;
 public class RobotMap {
  
   //CAN IDs
-  public static int CAN_PDP = 0;
-  public static int CAN_PCM = 1;
-  public static int CAN_FL_DRIVE_MOTOR = 2;
-  public static int CAN_BL_DRIVE_MOTOR = 3;
-  public static int CAN_FR_DRIVE_MOTOR = 4;
-  public static int CAN_BR_DRIVE_MOTOR = 5;
+  public static final int CAN_PDP = 0;
+  public static final int CAN_PCM = 1;
+  public static final int CAN_FL_DRIVE_MOTOR = 2;
+  public static final int CAN_BL_DRIVE_MOTOR = 3;
+  public static final int CAN_FR_DRIVE_MOTOR = 4;
+  public static final int CAN_BR_DRIVE_MOTOR = 5;
 
   //PCM Ports
-  public static int PCM_L_S_OUT = 0;
-  public static int PCM_L_S_IN = 1;
-  public static int PCM_R_S_OUT = 2;
-  public static int PCM_R_S_IN = 3;
-  public static int PCM_LIFT_S_OUT = 4;
-  public static int PCM_LIFT_S_IN = 5;
+  public static final int PCM_L_S_OUT = 0;
+  public static final int PCM_L_S_IN = 1;
+  public static final int PCM_R_S_OUT = 2;
+  public static final int PCM_R_S_IN = 3;
+  public static final int PCM_LIFT_S_OUT = 4;
+  public static final int PCM_LIFT_S_IN = 5;
 
   //PWM Ports
-  //public static int PWM_ = 0;
+  public static final int PWM_TURRET = 0;
+  public static final int PWM_LIFT_TL = 1;
+  public static final int PWM_LIFT_BL = 2;
+  public static final int PWM_LIFT_TR = 3;
+  public static final int PWM_LIFT_BR = 4; 
 }
