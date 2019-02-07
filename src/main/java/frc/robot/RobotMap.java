@@ -18,10 +18,10 @@ public class RobotMap {
   //CAN IDs
   public static int CAN_PDP = 0;
   public static int CAN_PCM = 1;
-  public static int CAN_FL_DRIVE_MOTOR = 2;
-  public static int CAN_BL_DRIVE_MOTOR = 3;
-  public static int CAN_FR_DRIVE_MOTOR = 4;
-  public static int CAN_BR_DRIVE_MOTOR = 5;
+  public static int CAN_FL_DRIVE_MOTOR = 9;
+  public static int CAN_BL_DRIVE_MOTOR = 8;
+  public static int CAN_FR_DRIVE_MOTOR = 10;
+  public static int CAN_BR_DRIVE_MOTOR = 11;
 
   //PCM Ports
   public static int PCM_L_S_OUT = 0;
