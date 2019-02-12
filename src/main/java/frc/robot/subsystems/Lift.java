@@ -7,8 +7,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.lift.OperateLift;
@@ -23,6 +25,8 @@ public class Lift extends Subsystem {
   Spark trMotor = new Spark(RobotMap.PWM_LIFT_TR);
   Spark blMotor = new Spark(RobotMap.PWM_LIFT_BL);
   Spark brMotor = new Spark(RobotMap.PWM_LIFT_BR);
+
+  DoubleSolenoid shifters = new DoubleSolenoid(RobotMap.PCM_LIFT_S_IN, RobotMap.PCM_LIFT_S_OUT);
 
   SpeedControllerGroup liftMotors = new SpeedControllerGroup(tlMotor, trMotor,blMotor,brMotor);
   
@@ -41,6 +45,21 @@ public class Lift extends Subsystem {
     liftMotors.set(speed);
   }
 
+  /**
+   * Shift to high gear
+   */
+  public void shiftHigh()
+  {
+    shifters.set(Value.kForward);
+  }
+
+  /**
+   * Shift to low gear
+   */
+  public void shiftLow()
+  {
+    shifters.set(Value.kReverse);
+  }
   /**
    * Stops the Lift
    */

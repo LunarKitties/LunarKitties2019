@@ -10,7 +10,9 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
@@ -37,6 +39,8 @@ public class DriveTrain extends Subsystem {
   //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
 
+  //Wheel Shifters
+    DoubleSolenoid shifters = new DoubleSolenoid(RobotMap.PCM_DRIVE_S_IN, RobotMap.PCM_DRIVE_S_OUT);
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new DriveWithController());
@@ -49,6 +53,22 @@ public class DriveTrain extends Subsystem {
    */
   public void run(double speed, double rotate) {
     dd.arcadeDrive(speed, rotate);
+  }
+
+   /**
+   * Shift to high gear
+   */
+  public void shiftHigh()
+  {
+    shifters.set(Value.kForward);
+  }
+
+  /**
+   * Shift to low gear
+   */
+  public void shiftLow()
+  {
+    shifters.set(Value.kReverse);
   }
 
   /**

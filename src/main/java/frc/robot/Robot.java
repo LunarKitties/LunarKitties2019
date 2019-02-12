@@ -12,9 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Accumulator;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.HatchManipulator;
 import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.Tilt;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,9 +36,11 @@ public class Robot extends TimedRobot {
   /**
    * Subsystems
    */
+  public static Accumulator mAccumulator;
   public static DriveTrain mDriveTrain;
+  public static HatchManipulator mHatchManipulator;
   public static Lift mLift;
-  public static Turret mTurret;
+  public static Tilt mTilt;
 
 
   /**
@@ -47,10 +51,11 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     //Initialize Subsystems
+    mAccumulator = new Accumulator();
     mDriveTrain = new DriveTrain();
+    mHatchManipulator = new HatchManipulator();
     mLift = new Lift();
-    mTurret = new Turret();
-    
+    mTilt = new Tilt();
     //Make sure OI is last
     m_oi = new OI();
    

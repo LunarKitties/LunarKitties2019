@@ -5,45 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.turret;
+package frc.robot.commands.hatchmanipulator;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class OperateTurret extends Command {
-  public OperateTurret() {
-    requires(Robot.mTurret);
+public class RetractPopper extends Command {
+  public RetractPopper() {
+    // Use requires() here to declare subsystem dependencies
+    requires(Robot.mHatchManipulator);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.mHatchManipulator.retract();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.mTurret.rotate(Robot.m_oi.getXboxController2().getX(Hand.kRight));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.mTurret.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    //May need to change this logic if we have a function to rotate the turret to a certain location.
-    Robot.mTurret.stop();
   }
 }

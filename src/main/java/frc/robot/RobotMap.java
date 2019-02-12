@@ -22,17 +22,22 @@ public class RobotMap {
   public static int CAN_BL_DRIVE_MOTOR = 8;
   public static int CAN_FR_DRIVE_MOTOR = 10;
   public static int CAN_BR_DRIVE_MOTOR = 11;
+  public static int CAN_TOP_ACCUMULATOR = 2;
+  public static int CAN_BOTTOM_ACCUMULATOR = 3;
+  public static int CAN_LEFT_TILT = 4;
+  public static int CAN_RIGHt_TILT = 5;
 
   //PCM Ports
-  public static final int PCM_L_S_OUT = 0;
-  public static final int PCM_L_S_IN = 1;
-  public static final int PCM_R_S_OUT = 2;
-  public static final int PCM_R_S_IN = 3;
-  public static final int PCM_LIFT_S_OUT = 4;
-  public static final int PCM_LIFT_S_IN = 5;
+  public static final int PCM_DRIVE_S_OUT = 0;
+  public static final int PCM_DRIVE_S_IN = 1;
+  public static final int PCM_LIFT_S_OUT = 2;
+  public static final int PCM_LIFT_S_IN = 3;
+  public static final int PCM_HATCH_OUT = 4;
+  public static final int PCM_HATCH_IN = 5;
+  public static final int PCM_HATCH_CLAMP_OUT = 6;
+  public static final int PCM_HATCH_CLAMP_IN = 7;
 
   //PWM Ports
-  public static final int PWM_TURRET = 0;
   public static final int PWM_LIFT_TL = 1;
   public static final int PWM_LIFT_BL = 2;
   public static final int PWM_LIFT_TR = 3;
