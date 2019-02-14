@@ -25,7 +25,17 @@ public class OperateLift extends Command {
   @Override
   protected void execute() {
 
-    Robot.mLift.run(Robot.m_oi.getXboxController2().getY(Hand.kLeft));
+    double liftSpeed = Robot.m_oi.getXboxController2().getY(Hand.kLeft);
+    double cameraSpeed = 0;
+    if(liftSpeed < 0) // Lowering
+    		cameraSpeed = -liftSpeed * .02; //Lift comes down faster
+    	else //Raising
+    		cameraSpeed = -liftSpeed *.004; //Move the camera slightly
+    	
+    	Robot.mCameraHandler.adjustCameraPosition(cameraSpeed); //Adjust the camera while operating lift
+      
+      
+    Robot.mLift.run(liftSpeed);
     
   }
 

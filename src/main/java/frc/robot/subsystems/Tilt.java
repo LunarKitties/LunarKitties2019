@@ -9,23 +9,24 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.lift.OperateLift;
+import frc.robot.commands.tilt.OperateTilt;
 
 /**
  * Operates the tilt of arm
  */
 public class Tilt extends Subsystem {
   
-  private TalonSRX leftTilt = new TalonSRX(RobotMap.CAN_LEFT_TILT);
-  private TalonSRX rightTilt = new TalonSRX(RobotMap.CAN_RIGHt_TILT);
+  private VictorSPX tilt = new VictorSPX(RobotMap.CAN_TILT);
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new OperateLift());
+    setDefaultCommand(new OperateTilt());
   }
 
   /**
@@ -34,8 +35,7 @@ public class Tilt extends Subsystem {
    */
   public void run(double power)
   {
-    leftTilt.set(ControlMode.PercentOutput, power);
-    rightTilt.follow(leftTilt);
+    tilt.set(ControlMode.PercentOutput, power);
   }
 
   /**
@@ -43,7 +43,6 @@ public class Tilt extends Subsystem {
    */
   public void stop()
   {
-    leftTilt.set(ControlMode.PercentOutput, 0);
-    rightTilt.set(ControlMode.PercentOutput,0);
+    tilt.set(ControlMode.PercentOutput, 0);
   }
 }

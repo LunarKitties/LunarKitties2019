@@ -19,7 +19,7 @@ public class HatchManipulator extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   DoubleSolenoid clamp = new DoubleSolenoid(RobotMap.PCM_HATCH_CLAMP_IN, RobotMap.PCM_HATCH_CLAMP_OUT);
-  DoubleSolenoid popper = new DoubleSolenoid(RobotMap.PCM_HATCH_CLAMP_IN, RobotMap.PCM_HATCH_CLAMP_OUT);
+  DoubleSolenoid popper = new DoubleSolenoid(RobotMap.PCM_HATCH_IN, RobotMap.PCM_HATCH_OUT);
 
   @Override
   public void initDefaultCommand() {
@@ -48,7 +48,7 @@ public class HatchManipulator extends Subsystem {
    */
   public void pop()
   {
-    clamp.set(Value.kForward);
+    popper.set(Value.kForward);
   }
 
   /**
@@ -56,7 +56,7 @@ public class HatchManipulator extends Subsystem {
    */
   public void retract()
   {
-    clamp.set(Value.kReverse);
+    popper.set(Value.kReverse);
   }
 
 

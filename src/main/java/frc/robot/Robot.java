@@ -7,12 +7,19 @@
 
 package frc.robot;
 
+
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Accumulator;
+import frc.robot.subsystems.CameraHandler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HatchManipulator;
 import frc.robot.subsystems.Lift;
@@ -37,10 +44,12 @@ public class Robot extends TimedRobot {
    * Subsystems
    */
   public static Accumulator mAccumulator;
+  public static CameraHandler mCameraHandler;
   public static DriveTrain mDriveTrain;
   public static HatchManipulator mHatchManipulator;
   public static Lift mLift;
   public static Tilt mTilt;
+	Compressor c;
 
 
   /**
@@ -52,6 +61,7 @@ public class Robot extends TimedRobot {
 
     //Initialize Subsystems
     mAccumulator = new Accumulator();
+    mCameraHandler = new CameraHandler();
     mDriveTrain = new DriveTrain();
     mHatchManipulator = new HatchManipulator();
     mLift = new Lift();
@@ -59,6 +69,18 @@ public class Robot extends TimedRobot {
     //Make sure OI is last
     m_oi = new OI();
    
+
+    c = new Compressor(0);
+
+    c.setClosedLoopControl(true);
+    
+    mCameraHandler.setToBottom();
+		
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setBrightness(50);
+		camera.setVideoMode(VideoMode.PixelFormat.kMJPEG,200,
+        470,30);
+        
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
@@ -150,5 +172,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    SmartDashboard.putData(mCameraHandler);
+    
   }
 }

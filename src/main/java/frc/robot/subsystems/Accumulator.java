@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -21,6 +22,10 @@ public class Accumulator extends Subsystem {
   TalonSRX topAccum = new TalonSRX(RobotMap.CAN_TOP_ACCUMULATOR);
   TalonSRX bottomAccum = new TalonSRX(RobotMap.CAN_BOTTOM_ACCUMULATOR);
 
+  public Accumulator()
+  {
+    bottomAccum.setInverted(InvertType.OpposeMaster);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
