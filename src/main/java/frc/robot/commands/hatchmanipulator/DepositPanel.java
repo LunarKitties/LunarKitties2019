@@ -5,51 +5,65 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.tilt;
+package frc.robot.commands.hatchmanipulator;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class OperateTilt extends Command {
-  public OperateTilt() {
+public class DepositPanel extends Command {
+  boolean done = false;
+
+  public DepositPanel() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.mTilt);
+    requires(Robot.mHatchManipulator);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    done = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double speed = Robot.m_oi.getXboxController2().getY(Hand.kRight);
-    SmartDashboard.putNumber("Tilt Speed", speed);
-   if(speed > 0 || !Robot.mTilt.isAtTop())
-      Robot.mTilt.run(speed);
-    else
-      Robot.mTilt.stop();
+    Robot.mHatchManipulator.pop();
+    if(Robot.mHatchManipulator.isTouching())
+    {       
+      new Thread()
+      {
+        public void run()
+        {
+          try{
+            Thread.sleep(250);
+            Robot.mHatchManipulator.releaseHatch();
+            Robot.mHatchManipulator.retract();
+            } catch(Exception ex){
+            System.err.println("Took to long to get panel!");
+          }
+          done = true;
+          return;
+        }
+      }.start();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return done;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.mTilt.stop();
+    done = false;
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.mTilt.stop();
+    done = false;
   }
 }

@@ -34,7 +34,10 @@ public class OperateAccumulator extends Command {
     double rt = xbox.getTriggerAxis(Hand.kRight);
     double speed = lt - rt;
 
-    Robot.mAccumulator.run(speed);
+    if(!Robot.mAccumulator.ballGrabbed() || speed > 0)
+      Robot.mAccumulator.run(speed);
+    else
+      Robot.mAccumulator.stop();
   }
 
   // Make this return true when this Command no longer needs to run execute()

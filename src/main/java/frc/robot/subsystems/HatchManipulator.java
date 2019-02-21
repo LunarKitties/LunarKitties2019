@@ -7,10 +7,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.hatchmanipulator.MonitorHatch;
 
 /**
  * Controls the Hatch Manipulator of the Robot
@@ -20,10 +23,12 @@ public class HatchManipulator extends Subsystem {
   // here. Call these from Commands.
   DoubleSolenoid clamp = new DoubleSolenoid(RobotMap.PCM_HATCH_CLAMP_IN, RobotMap.PCM_HATCH_CLAMP_OUT);
   DoubleSolenoid popper = new DoubleSolenoid(RobotMap.PCM_HATCH_IN, RobotMap.PCM_HATCH_OUT);
+  DigitalInput panelSwitch = new DigitalInput(RobotMap.DIO_HATCH_PANEL_SWITCH);
 
+  boolean panelPossessed = false;
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
+    //setDefaultCommand(new MonitorHatch());
   }
 
   /**
@@ -31,7 +36,8 @@ public class HatchManipulator extends Subsystem {
    */
   public void clampHatch()
   {
-    clamp.set(Value.kForward);
+    clamp.set(Value.kReverse);
+    panelPossessed = true;
   }
 
   /**
@@ -39,7 +45,9 @@ public class HatchManipulator extends Subsystem {
    */
   public void releaseHatch()
   {
-    clamp.set(Value.kReverse);
+    clamp.set(Value.kForward);
+    panelPossessed = false;
+
   }
 
   /**
@@ -57,6 +65,20 @@ public class HatchManipulator extends Subsystem {
   public void retract()
   {
     popper.set(Value.kReverse);
+  }
+
+  public boolean isTouching()
+  {
+    return !panelSwitch.get();
+  }
+  public void log()
+  {
+    SmartDashboard.putBoolean("Hatch Panel Pressed", isTouching());
+  }
+
+  public boolean havePanel()
+  {
+    return panelPossessed;
   }
 
 

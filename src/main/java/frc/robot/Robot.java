@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Accumulator;
 import frc.robot.subsystems.CameraHandler;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.FloorJack;
+import frc.robot.subsystems.HABClimber;
 import frc.robot.subsystems.HatchManipulator;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Tilt;
@@ -45,7 +47,9 @@ public class Robot extends TimedRobot {
   public static Accumulator mAccumulator;
   public static CameraHandler mCameraHandler;
   public static DriveTrain mDriveTrain;
+  public static HABClimber mClimber;
   public static HatchManipulator mHatchManipulator;
+  public static FloorJack mFloorJack;
   public static Lift mLift;
   public static Tilt mTilt;
 	Compressor c;
@@ -63,11 +67,14 @@ public class Robot extends TimedRobot {
     mCameraHandler = new CameraHandler();
     mDriveTrain = new DriveTrain();
     mHatchManipulator = new HatchManipulator();
+    mFloorJack = new FloorJack();
+    mClimber = new HABClimber();
     mLift = new Lift();
     mTilt = new Tilt();
     //Make sure OI is last
     m_oi = new OI();
    
+    mHatchManipulator.releaseHatch();
 
     c = new Compressor(0);
 
@@ -164,6 +171,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    mTilt.log();
+    mAccumulator.log();
+    mFloorJack.log();
+    mHatchManipulator.log();
+    mLift.log();
+    mClimber.log();
   }
 
   /**

@@ -8,9 +8,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.tilt.OperateTilt;
 
@@ -20,11 +24,22 @@ import frc.robot.commands.tilt.OperateTilt;
 public class Tilt extends Subsystem {
   
   private VictorSPX tilt = new VictorSPX(RobotMap.CAN_TILT);
-
+  private Counter tiltCounter = new Counter(RobotMap.DIO_TILT_COUNTER);
+  private DigitalInput tiltSwitch = new DigitalInput(RobotMap.DIO_TILT_SWITCH);
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new OperateTilt());
+  }
+
+  /**
+   * Puts data on SmartDashboard
+   */
+  public void log()
+  {
+    SmartDashboard.putNumber("Tilt Counter", tiltCounter.get());
+    SmartDashboard.putBoolean("At Top", isAtTop());
   }
 
   /**
@@ -36,6 +51,25 @@ public class Tilt extends Subsystem {
     tilt.set(ControlMode.PercentOutput, power);
   }
 
+  /**
+   * Checks to see if the Tilt is at the top
+   */
+  public boolean isAtTop()
+  {
+    return !tiltSwitch.get();
+  }
+
+  public void resetCounter()
+  {
+    tiltCounter.reset();
+  }
+  /**
+   * Get Counter
+   */
+  public int getAngle()
+  {
+    return tiltCounter.get();
+  }
   /**
    * Stops the Tilt Motor
    */
