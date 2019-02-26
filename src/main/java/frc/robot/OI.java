@@ -7,18 +7,13 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.drivetrain.ShiftWheelsHigh;
 import frc.robot.commands.drivetrain.ShiftWheelsLow;
 import frc.robot.commands.hab.ToggleLatch;
-import frc.robot.commands.hatchmanipulator.ClampPanel;
 import frc.robot.commands.hatchmanipulator.DepositPanel;
-import frc.robot.commands.hatchmanipulator.PopPopper;
-import frc.robot.commands.hatchmanipulator.ReleasePanel;
-import frc.robot.commands.hatchmanipulator.RetractPopper;
 import frc.robot.commands.hatchmanipulator.RetrievePanel;
 import frc.robot.commands.lift.DisengageBrake;
 import frc.robot.commands.lift.EngageBrake;

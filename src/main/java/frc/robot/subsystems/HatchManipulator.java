@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.hatchmanipulator.MonitorHatch;
 
 /**
  * Controls the Hatch Manipulator of the Robot
