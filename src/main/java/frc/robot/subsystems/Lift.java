@@ -7,11 +7,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.lift.OperateLift;
 
@@ -26,15 +28,34 @@ public class Lift extends Subsystem {
   Spark blMotor = new Spark(RobotMap.PWM_LIFT_BL);
   Spark brMotor = new Spark(RobotMap.PWM_LIFT_BR);
 
-  DoubleSolenoid shifters = new DoubleSolenoid(RobotMap.PCM_LIFT_S_IN, RobotMap.PCM_LIFT_S_OUT);
+  AnalogInput liftPot = new AnalogInput(RobotMap.AI_LIFT_POT);
 
-  SpeedControllerGroup liftMotors = new SpeedControllerGroup(tlMotor, trMotor,blMotor,brMotor);
+  DoubleSolenoid discBrake = new DoubleSolenoid(RobotMap.PCM_BRAKE_IN, RobotMap.PCM_BRAKE_OUT);
+
+  SpeedControllerGroup liftMotors = new SpeedControllerGroup(tlMotor, trMotor, blMotor, brMotor);
   
+  /*
+  * 
+Hatch Pot Heights
+* height-3.12
+* mid-2.2
+* low-.98
+*/
+  public static final double TOP_HEIGHT = 0.0;
+  public static final double MID_HEIGHT = 0.0;
+  public static final double BOT_HEIGHT = 0.0;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new OperateLift());
+  }
+
+  public void log()
+  {
+    SmartDashboard.putNumber("Potentiometer", liftPot.getVoltage());
+    SmartDashboard.putNumber("Potentiometer AVG", liftPot.getAverageVoltage());
+    SmartDashboard.putBoolean("Brake Engaged", (discBrake.get() == Value.kForward));
   }
 
   /**
@@ -46,24 +67,38 @@ public class Lift extends Subsystem {
   }
 
   /**
-   * Shift to high gear
+   * Push in the disc brake to prevent the lift from moving
    */
-  public void shiftHigh()
+  public void engageBrake()
   {
-    shifters.set(Value.kForward);
+    discBrake.set(Value.kForward);
   }
 
   /**
-   * Shift to low gear
+   * Release the disc brake to allow the lift to move.
    */
-  public void shiftLow()
+  public void disengagebrake()
   {
-    shifters.set(Value.kReverse);
+    discBrake.set(Value.kOff);
   }
+
   /**
    * Stops the Lift
    */
   public void stop() {
     liftMotors.stopMotor();
+  }
+
+  /**
+   * Returns if the brake is engaged
+   */
+  public boolean brakeEngaged()
+  {
+    return discBrake.get() == Value.kForward;
+  }
+
+  public double getLiftHeight()
+  {
+    return liftPot.getAverageVoltage();
   }
 }

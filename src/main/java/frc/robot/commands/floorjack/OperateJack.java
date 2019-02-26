@@ -5,17 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.tilt;
+package frc.robot.commands.floorjack;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class OperateTilt extends Command {
-  public OperateTilt() {
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.mTilt);
+public class OperateJack extends Command {
+  public OperateJack() {
+    requires(Robot.mFloorJack);
   }
 
   // Called just before this Command runs the first time
@@ -26,12 +24,7 @@ public class OperateTilt extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double speed = Robot.m_oi.getXboxController2().getY(Hand.kRight);
-    SmartDashboard.putNumber("Tilt Speed", speed);
-   if(speed > 0 || !Robot.mTilt.isAtTop())
-      Robot.mTilt.run(speed);
-    else
-      Robot.mTilt.stop();
+    Robot.mFloorJack.run(Robot.m_oi.getXboxController1().getY(Hand.kLeft));
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -43,13 +36,13 @@ public class OperateTilt extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.mTilt.stop();
+    Robot.mFloorJack.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.mTilt.stop();
+    Robot.mFloorJack.stop();
   }
 }

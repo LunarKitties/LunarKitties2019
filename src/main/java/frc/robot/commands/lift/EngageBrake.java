@@ -10,8 +10,8 @@ package frc.robot.commands.lift;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ShiftLiftHigh extends Command {
-  public ShiftLiftHigh() {
+public class EngageBrake extends Command {
+  public EngageBrake() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.mLift);
   }
@@ -19,7 +19,7 @@ public class ShiftLiftHigh extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.mLift.shiftHigh();
+    Robot.mLift.engageBrake();
   }
 
   // Called repeatedly when this Command is scheduled to run

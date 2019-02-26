@@ -5,17 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.tilt;
+package frc.robot.commands.hab;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class OperateTilt extends Command {
-  public OperateTilt() {
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.mTilt);
+public class OperateClimber extends Command {
+  public OperateClimber() {
+    requires(Robot.mClimber);
   }
 
   // Called just before this Command runs the first time
@@ -26,12 +25,19 @@ public class OperateTilt extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double speed = Robot.m_oi.getXboxController2().getY(Hand.kRight);
-    SmartDashboard.putNumber("Tilt Speed", speed);
-   if(speed > 0 || !Robot.mTilt.isAtTop())
-      Robot.mTilt.run(speed);
-    else
-      Robot.mTilt.stop();
+    XboxController xbox = Robot.m_oi.getXboxController1();
+    double pivot = xbox.getY(Hand.kRight);
+    
+
+     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
+     double lt = xbox.getTriggerAxis(Hand.kLeft);
+     double rt = xbox.getTriggerAxis(Hand.kRight);
+     double speed = lt - rt;
+
+     if(!Robot.mClimber.isLatched()) {
+      Robot.mClimber.movePivot(pivot);
+      Robot.mClimber.moveWheels(speed);
+     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -43,13 +49,11 @@ public class OperateTilt extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.mTilt.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.mTilt.stop();
   }
 }

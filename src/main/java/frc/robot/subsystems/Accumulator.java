@@ -8,8 +8,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.accumulator.OperateAccumulator;
 
@@ -20,7 +24,12 @@ import frc.robot.commands.accumulator.OperateAccumulator;
 public class Accumulator extends Subsystem {
   TalonSRX topAccum = new TalonSRX(RobotMap.CAN_TOP_ACCUMULATOR);
   TalonSRX bottomAccum = new TalonSRX(RobotMap.CAN_BOTTOM_ACCUMULATOR);
+  DigitalInput grabSwitch = new DigitalInput(RobotMap.DIO_ACCUMULATOR_SWITCH);
 
+  public Accumulator()
+  {
+    bottomAccum.setInverted(InvertType.OpposeMaster);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -39,5 +48,15 @@ public class Accumulator extends Subsystem {
   {
     topAccum.set(ControlMode.PercentOutput, 0);
     bottomAccum.set(ControlMode.PercentOutput, 0);
+  }
+
+  public boolean ballGrabbed()
+  {
+    return !grabSwitch.get();
+  }
+
+  public void log()
+  {
+    SmartDashboard.putBoolean("Ball Grabbed", ballGrabbed());
   }
 }

@@ -33,7 +33,7 @@ public class DriveTrain extends Subsystem {
     CANSparkMax brMotor = new CANSparkMax(RobotMap.CAN_BR_DRIVE_MOTOR, MotorType.kBrushless);
   
   //Group the Left and Right Motors together
-    SpeedControllerGroup leftWheels = new SpeedControllerGroup(flMotor, blMotor);
+    public SpeedControllerGroup leftWheels = new SpeedControllerGroup(flMotor, blMotor);
     SpeedControllerGroup rightWheels = new SpeedControllerGroup(frMotor, brMotor);
   
   //Create Differential Drive Object allowing us to drive the robot
@@ -46,13 +46,17 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new DriveWithController());
   }
 
+  public DriveTrain()
+  {
+    dd.setSafetyEnabled(false);
+  }
   /**
    * Drive Robot using Arcade Drive
    * @param speed Power for moving the robot robot -1 to 1
    * @param rotate Power for Rotating -1 to 1
    */
   public void run(double speed, double rotate) {
-    dd.arcadeDrive(speed, rotate);
+    dd.arcadeDrive(speed, -rotate);
   }
 
    /**

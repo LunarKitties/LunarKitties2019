@@ -7,18 +7,24 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.drivetrain.ShiftWheelsHigh;
 import frc.robot.commands.drivetrain.ShiftWheelsLow;
+import frc.robot.commands.hab.ToggleLatch;
 import frc.robot.commands.hatchmanipulator.ClampPanel;
+import frc.robot.commands.hatchmanipulator.DepositPanel;
 import frc.robot.commands.hatchmanipulator.PopPopper;
 import frc.robot.commands.hatchmanipulator.ReleasePanel;
 import frc.robot.commands.hatchmanipulator.RetractPopper;
-import frc.robot.commands.lift.ShiftLiftHigh;
-import frc.robot.commands.lift.ShiftLiftLow;
+import frc.robot.commands.hatchmanipulator.RetrievePanel;
+import frc.robot.commands.lift.DisengageBrake;
+import frc.robot.commands.lift.EngageBrake;
+import frc.robot.commands.lift.MoveLiftToBottom;
+import frc.robot.commands.lift.MoveLiftToMid;
+import frc.robot.commands.lift.MoveLiftToTop;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -52,28 +58,36 @@ public class OI {
   XboxController xbox1 = new XboxController(0);
   XboxController xbox2 = new XboxController(1);
 
-  Button btnPop = new JoystickButton(xbox2, a);
-  Button btnRetract = new JoystickButton(xbox2, b);
-  Button btnClamp = new JoystickButton(xbox2, x);
-  Button btnRelease = new JoystickButton(xbox2, y);
-  Button btnShiftLiftHigh = new JoystickButton(xbox2, rb);
-  Button btnShiftLiftLow = new JoystickButton(xbox2,lb);
+  Button btnGetPanel = new JoystickButton(xbox2, rb);
+  Button btnDepositPanel = new JoystickButton(xbox2, lb);
+
+  Button btnLiftTop = new JoystickButton(xbox2, y);
+  Button btnLiftMid = new JoystickButton(xbox2, b);
+  Button btnLiftBot = new JoystickButton(xbox2, a);
+ 
+  Button btnEngageBrake = new JoystickButton(xbox2, x);
+  Button btnDisengageBrake = new JoystickButton(xbox2, start);
 
   Button btnShiftWheelsHigh = new JoystickButton(xbox1, rb);
   Button btnShiftWheelsLow = new JoystickButton(xbox1, lb);
 
+  Button btnToggleLatch = new JoystickButton(xbox1, start);
+
   public OI()
   {
-    btnPop.whenPressed(new PopPopper());
-    btnRetract.whenPressed(new RetractPopper());    
-    btnClamp.whenPressed(new ClampPanel());
-    btnRelease.whenPressed(new ReleasePanel());
-    
-    btnShiftLiftHigh.whenPressed(new ShiftLiftHigh());
-    btnShiftLiftLow.whenPressed(new ShiftLiftLow());
+    btnGetPanel.whenPressed(new RetrievePanel());
+    btnDepositPanel.whenPressed(new DepositPanel());    
 
+    btnLiftTop.whenReleased(new MoveLiftToTop());
+    btnLiftMid.whenReleased(new MoveLiftToMid());
+    btnLiftBot.whenReleased(new MoveLiftToBottom());
+    
+    btnEngageBrake.whenReleased(new EngageBrake());
+    btnDisengageBrake.whenReleased(new DisengageBrake());
     btnShiftWheelsHigh.whenPressed(new ShiftWheelsHigh());
     btnShiftWheelsLow.whenPressed(new ShiftWheelsLow());
+
+    btnToggleLatch.whenReleased(new ToggleLatch());
   }
   /**
    * Get the Xbox Controller plugged into port 0
