@@ -43,10 +43,7 @@ public class RobotMap {
   //PWM Ports
   public static final int PWM_CAMERA_TILT = 0;
   public static final int PWM_BLINKIN = 5;
-  public static final int PWM_LIFT_TL = 6;
-  public static final int PWM_LIFT_BL = 7;
-  public static final int PWM_LIFT_TR = 8;
-  public static final int PWM_LIFT_BR = 9; 
+  public static final int PWM_LIFT = 9; 
 
   //DIO Ports
 

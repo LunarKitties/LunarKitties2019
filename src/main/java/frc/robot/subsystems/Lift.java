@@ -9,8 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,16 +22,12 @@ import frc.robot.commands.lift.OperateLift;
  */
 public class Lift extends Subsystem {
   
-  Spark tlMotor = new Spark(RobotMap.PWM_LIFT_TL);
-  Spark trMotor = new Spark(RobotMap.PWM_LIFT_TR);
-  Spark blMotor = new Spark(RobotMap.PWM_LIFT_BL);
-  Spark brMotor = new Spark(RobotMap.PWM_LIFT_BR);
+  Talon liftMotor = new Talon(RobotMap.PWM_LIFT);
 
   AnalogInput liftPot = new AnalogInput(RobotMap.AI_LIFT_POT);
 
   DoubleSolenoid discBrake = new DoubleSolenoid(RobotMap.PCM_BRAKE_IN, RobotMap.PCM_BRAKE_OUT);
 
-  SpeedControllerGroup liftMotors = new SpeedControllerGroup(tlMotor, trMotor, blMotor, brMotor);
   
   /*
   * 
@@ -41,9 +36,9 @@ Hatch Pot Heights
 * mid-2.2
 * low-.98
 */
-  public static final double TOP_HEIGHT = 0.0;
-  public static final double MID_HEIGHT = 0.0;
-  public static final double BOT_HEIGHT = 0.0;
+  public static final double TOP_HEIGHT = 3.12;
+  public static final double MID_HEIGHT = 2.2;
+  public static final double BOT_HEIGHT = 0.98;
 
   @Override
   public void initDefaultCommand() {
@@ -63,7 +58,7 @@ Hatch Pot Heights
    * @param speed Value between -1 and 1 to raise/lower the lift
    */
   public void run(double speed) {
-    liftMotors.set(speed);
+    liftMotor.set(speed);
   }
 
   /**
@@ -79,14 +74,14 @@ Hatch Pot Heights
    */
   public void disengagebrake()
   {
-    discBrake.set(Value.kOff);
+    discBrake.set(Value.kReverse);
   }
 
   /**
    * Stops the Lift
    */
   public void stop() {
-    liftMotors.stopMotor();
+    liftMotor.stopMotor();
   }
 
   /**
