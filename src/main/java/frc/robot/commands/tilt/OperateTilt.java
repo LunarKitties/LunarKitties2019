@@ -26,9 +26,9 @@ public class OperateTilt extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double speed = Robot.m_oi.getXboxController2().getY(Hand.kRight);
+    double speed = -Robot.m_oi.getXboxController2().getY(Hand.kRight);
     SmartDashboard.putNumber("Tilt Speed", speed);
-   if(speed > 0 || !Robot.mTilt.isAtTop())
+   if(speed < 0 || !Robot.mTilt.isAtTop())
       Robot.mTilt.run(speed);
     else
       Robot.mTilt.stop();

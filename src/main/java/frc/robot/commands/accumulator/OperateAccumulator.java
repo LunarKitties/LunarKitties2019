@@ -32,9 +32,9 @@ public class OperateAccumulator extends Command {
     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
     double lt = xbox.getTriggerAxis(Hand.kLeft);
     double rt = xbox.getTriggerAxis(Hand.kRight);
-    double speed = lt - rt;
+    double speed = rt - lt;
 
-    if(!Robot.mAccumulator.ballGrabbed() || speed > 0)
+    if(!Robot.mAccumulator.ballGrabbed() || speed < 0)
       Robot.mAccumulator.run(speed);
     else
       Robot.mAccumulator.stop();

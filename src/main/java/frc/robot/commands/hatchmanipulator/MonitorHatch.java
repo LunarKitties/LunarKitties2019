@@ -7,6 +7,7 @@
 
 package frc.robot.commands.hatchmanipulator;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -23,9 +24,24 @@ public class MonitorHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.mHatchManipulator.isTouching())
+    if(Robot.m_oi.getXboxController2().getBumperReleased(Hand.kRight))
     {
-      Robot.mHatchManipulator.clampHatch();
+     if(Robot.mHatchManipulator.isPopped())
+     {
+       Robot.mHatchManipulator.retract();
+     } else {
+       Robot.mHatchManipulator.pop();
+     }
+    }
+
+    if(Robot.m_oi.getXboxController2().getBumperReleased(Hand.kLeft))
+    {
+      if(Robot.mHatchManipulator.isClamp())
+      {
+        Robot.mHatchManipulator.releaseHatch();
+      } else {
+        Robot.mHatchManipulator.clampHatch();
+      }
     }
   }
 

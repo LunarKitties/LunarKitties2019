@@ -56,4 +56,10 @@ public class RobotMap {
 
   //Analog Input Ports
   public static final int AI_LIFT_POT = 0;
+
+  
+  public static final double TOP_ROCKET_ANGlE = 0.10;
+  public static final double MIDDLE_ROCKET_ANGLE = 0.20;
+  public static final double BOTTOM_ROCKET_ANGLE = 0.35;
+  public static final double BOTTOM_ANGLE = 0.45;
 }

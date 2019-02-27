@@ -9,6 +9,7 @@ package frc.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Lift;
 
 public class MoveLiftToTop extends Command {
@@ -27,14 +28,12 @@ public class MoveLiftToTop extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.mLift.getLiftHeight() >= Lift.TOP_HEIGHT) {
-      Robot.mLift.run(-0.5); 
-      rising = false;
-    } else
-    {
-      Robot.mLift.run(.5);
+
+      Robot.mLift.run(1);
       rising = true;
-    }
+      Robot.mCameraHandler.setCameraPosition(RobotMap.TOP_ROCKET_ANGlE);
+
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,10 +41,22 @@ public class MoveLiftToTop extends Command {
   protected boolean isFinished() {
     if(rising)
     {
-      return Robot.mLift.getLiftHeight() >= Lift.TOP_HEIGHT;
+      if(Robot.mLift.getLiftHeight() >= Lift.TOP_HEIGHT) {
+          Robot.mLift.engageBrake();
+          Robot.mLift.stop();
+          return true;
+      } else {
+          return false;
+      }
     } else {
-      return Robot.mLift.getLiftHeight() <= Lift.TOP_HEIGHT;
-    }  
+        if(Robot.mLift.getLiftHeight() <= Lift.TOP_HEIGHT) {
+          Robot.mLift.engageBrake();
+          Robot.mLift.stop();
+          return true;
+        } else {
+          return false;
+        }
+    }
   }
 
   // Called once after isFinished returns true
@@ -53,6 +64,8 @@ public class MoveLiftToTop extends Command {
   protected void end() {
     Robot.mLift.stop();
     Robot.mLift.engageBrake();
+    Robot.mCameraHandler.setCameraPosition(RobotMap.TOP_ROCKET_ANGlE);
+
   }
 
   // Called when another command which requires one or more of the same

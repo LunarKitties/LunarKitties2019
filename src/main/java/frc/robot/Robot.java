@@ -23,6 +23,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.FloorJack;
 import frc.robot.subsystems.HABClimber;
 import frc.robot.subsystems.HatchManipulator;
+import frc.robot.subsystems.LEDS;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Tilt;
 
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
   public static HatchManipulator mHatchManipulator;
   public static FloorJack mFloorJack;
   public static Lift mLift;
+  public static LEDS mLeds;
   public static Tilt mTilt;
 	Compressor c;
 
@@ -63,6 +65,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     //Initialize Subsystems
+    mLeds = new LEDS();
     mAccumulator = new Accumulator();
     mCameraHandler = new CameraHandler();
     mDriveTrain = new DriveTrain();
@@ -87,6 +90,9 @@ public class Robot extends TimedRobot {
 		camera.setVideoMode(VideoMode.PixelFormat.kMJPEG,200,
         470,30);
         
+
+    
+        mLeds.setColor(LEDS.SPECIAL_CHASE);
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);

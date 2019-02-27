@@ -31,7 +31,7 @@ public class HABClimber extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new OperateClimber());
+   // setDefaultCommand(new OperateClimber());
   }
 
   public void movePivot(double speed)

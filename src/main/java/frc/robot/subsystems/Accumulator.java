@@ -58,5 +58,7 @@ public class Accumulator extends Subsystem {
   public void log()
   {
     SmartDashboard.putBoolean("Ball Grabbed", ballGrabbed());
+    SmartDashboard.putNumber("Top Accumulator Speed", topAccum.getMotorOutputPercent());
+    SmartDashboard.putNumber("Bottom Accumulator Speed", bottomAccum.getMotorOutputPercent());
   }
 }

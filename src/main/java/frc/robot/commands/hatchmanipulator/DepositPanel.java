@@ -27,9 +27,7 @@ public class DepositPanel extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.mHatchManipulator.pop();
-    if(Robot.mHatchManipulator.isTouching())
-    {       
+    Robot.mHatchManipulator.pop();     
       new Thread()
       {
         public void run()
@@ -46,7 +44,7 @@ public class DepositPanel extends Command {
         }
       }.start();
     }
-  }
+  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.hatchmanipulator.MonitorHatch;
 
 /**
  * Controls the Hatch Manipulator of the Robot
@@ -27,8 +28,9 @@ public class HatchManipulator extends Subsystem {
   boolean panelPossessed = false;
   @Override
   public void initDefaultCommand() {
-    //setDefaultCommand(new MonitorHatch());
+    setDefaultCommand(new MonitorHatch());
   }
+
 
   /**
    * Grabs the Hatch Panel
@@ -73,11 +75,24 @@ public class HatchManipulator extends Subsystem {
   public void log()
   {
     SmartDashboard.putBoolean("Hatch Panel Pressed", isTouching());
+    SmartDashboard.putBoolean("Popper Popped Out", popper.get() == Value.kForward);
+    SmartDashboard.putBoolean("Clamp Clamped", clamp.get() == Value.kReverse);
+    SmartDashboard.putBoolean("Have Panel", havePanel());
   }
 
   public boolean havePanel()
   {
     return panelPossessed;
+  }
+
+  public boolean isPopped()
+  {
+    return popper.get() == Value.kForward;
+  }
+
+  public boolean isClamp()
+  {
+    return clamp.get() == Value.kReverse;
   }
 
 

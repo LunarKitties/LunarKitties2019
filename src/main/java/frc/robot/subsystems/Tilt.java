@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Counter;
@@ -26,6 +27,10 @@ public class Tilt extends Subsystem {
   private Counter tiltCounter = new Counter(RobotMap.DIO_TILT_COUNTER);
   private DigitalInput tiltSwitch = new DigitalInput(RobotMap.DIO_TILT_SWITCH);
   
+  public Tilt()
+  {
+    tilt.setInverted(InvertType.InvertMotorOutput);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -39,6 +44,7 @@ public class Tilt extends Subsystem {
   {
     SmartDashboard.putNumber("Tilt Counter", tiltCounter.get());
     SmartDashboard.putBoolean("At Top", isAtTop());
+    SmartDashboard.putNumber("Tilt Speed", tilt.getMotorOutputPercent());
   }
 
   /**
@@ -55,7 +61,7 @@ public class Tilt extends Subsystem {
    */
   public boolean isAtTop()
   {
-    return !tiltSwitch.get();
+    return tiltSwitch.get();
   }
 
   public void resetCounter()

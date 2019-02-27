@@ -50,7 +50,8 @@ Hatch Pot Heights
   {
     SmartDashboard.putNumber("Potentiometer", liftPot.getVoltage());
     SmartDashboard.putNumber("Potentiometer AVG", liftPot.getAverageVoltage());
-    SmartDashboard.putBoolean("Brake Engaged", (discBrake.get() == Value.kForward));
+    SmartDashboard.putBoolean("Brake Engaged", brakeEngaged());
+    SmartDashboard.putNumber("Lift Speed", liftMotor.get());
   }
 
   /**
@@ -58,6 +59,13 @@ Hatch Pot Heights
    * @param speed Value between -1 and 1 to raise/lower the lift
    */
   public void run(double speed) {
+    if(brakeEngaged() && Math.abs(speed) > 0.1)
+    {
+      disengagebrake();
+    } else if (Math.abs(speed) < .1)
+    {
+      engageBrake();
+    }
     liftMotor.set(speed);
   }
 
@@ -66,7 +74,7 @@ Hatch Pot Heights
    */
   public void engageBrake()
   {
-    discBrake.set(Value.kForward);
+    discBrake.set(Value.kReverse);
   }
 
   /**
@@ -74,7 +82,7 @@ Hatch Pot Heights
    */
   public void disengagebrake()
   {
-    discBrake.set(Value.kReverse);
+    discBrake.set(Value.kForward);
   }
 
   /**
@@ -89,11 +97,16 @@ Hatch Pot Heights
    */
   public boolean brakeEngaged()
   {
-    return discBrake.get() == Value.kForward;
+    return discBrake.get() == Value.kReverse;
   }
 
   public double getLiftHeight()
   {
     return liftPot.getAverageVoltage();
+  }
+
+  public boolean atBottom()
+  {
+    return liftPot.getAverageVoltage() <= 0.05;
   }
 }

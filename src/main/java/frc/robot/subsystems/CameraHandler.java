@@ -16,9 +16,9 @@ public class CameraHandler extends Subsystem {
 	
 	public Servo cameraTilt = new Servo(RobotMap.PWM_CAMERA_TILT);
 	
-	public static final double TOP_ANGLE = .6;
-    public static final double BOTTOM_ANGLE = 0;
-    
+    public static final double TOP_ANGLE = 0;
+    public static final double BOTTOM_ANGLE = 0.46;
+
     public CameraHandler()
     {
         setName("Camera Handler");
@@ -33,10 +33,10 @@ public class CameraHandler extends Subsystem {
     
     public void setCameraPosition(double angle)
     {
-    	if(angle > TOP_ANGLE)
-    		angle = TOP_ANGLE;
-    	else if(angle < BOTTOM_ANGLE)
-    		angle = BOTTOM_ANGLE;
+    	// if(angle > TOP_ANGLE)
+    	// 	angle = TOP_ANGLE;
+    	// else if(angle < BOTTOM_ANGLE)
+    	// 	angle = BOTTOM_ANGLE;
     	
     	cameraTilt.set(angle);
     }

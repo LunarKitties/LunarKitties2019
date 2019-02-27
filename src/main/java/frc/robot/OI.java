@@ -70,8 +70,8 @@ public class OI {
 
   public OI()
   {
-    btnGetPanel.whenPressed(new RetrievePanel());
-    btnDepositPanel.whenPressed(new DepositPanel());    
+    // btnGetPanel.whenPressed(new RetrievePanel());
+    // btnDepositPanel.whenPressed(new DepositPanel());    
 
     btnLiftTop.whenReleased(new MoveLiftToTop());
     btnLiftMid.whenReleased(new MoveLiftToMid());
