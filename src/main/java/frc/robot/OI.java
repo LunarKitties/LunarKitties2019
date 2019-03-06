@@ -10,16 +10,30 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.buttons.LiftHatchControlButtons.LiftToBottomHatchButton;
+import frc.robot.buttons.LiftHatchControlButtons.LiftToMiddleHatchButton;
+import frc.robot.buttons.LiftHatchControlButtons.LiftToTopHatchButton;
+import frc.robot.buttons.LiftBallControlButtons;
+import frc.robot.buttons.LiftBallControlButtons.LiftToBottomBallButton;
+import frc.robot.buttons.LiftBallControlButtons.LiftToMiddleBallButton;
+import frc.robot.buttons.LiftBallControlButtons.LiftToTopBallButton;
 import frc.robot.commands.drivetrain.ShiftWheelsHigh;
 import frc.robot.commands.drivetrain.ShiftWheelsLow;
 import frc.robot.commands.hab.ToggleLatch;
 import frc.robot.commands.hatchmanipulator.DepositPanel;
+import frc.robot.commands.hatchmanipulator.GrabAndStore;
+import frc.robot.commands.hatchmanipulator.PopAndDeposit;
+import frc.robot.commands.hatchmanipulator.PopAndWait;
+import frc.robot.commands.hatchmanipulator.ResetManipulator;
+import frc.robot.commands.hatchmanipulator.RetractAndScore;
 import frc.robot.commands.hatchmanipulator.RetrievePanel;
 import frc.robot.commands.lift.DisengageBrake;
 import frc.robot.commands.lift.EngageBrake;
 import frc.robot.commands.lift.MoveLiftToBottom;
 import frc.robot.commands.lift.MoveLiftToMid;
 import frc.robot.commands.lift.MoveLiftToTop;
+import frc.robot.commands.lift.MoveToMiddleHatch;
+import frc.robot.commands.lift.MoveToTopHatch;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -50,9 +64,10 @@ public class OI {
 	dpad_down = 180,
   dpad_left = 270;
 
-  XboxController xbox1 = new XboxController(0);
-  XboxController xbox2 = new XboxController(1);
+  public XboxController xbox1 = new XboxController(0);
+  public XboxController xbox2 = new XboxController(1);
 
+  //LiftBallControlButtons liftBallControlButtons = new LiftBallControlButtons(xbox2);
   Button btnGetPanel = new JoystickButton(xbox2, rb);
   Button btnDepositPanel = new JoystickButton(xbox2, lb);
 
@@ -60,24 +75,47 @@ public class OI {
   Button btnLiftMid = new JoystickButton(xbox2, b);
   Button btnLiftBot = new JoystickButton(xbox2, a);
  
-  Button btnEngageBrake = new JoystickButton(xbox2, x);
+  Button btnResetManipulator = new JoystickButton(xbox2, x);
   Button btnDisengageBrake = new JoystickButton(xbox2, start);
 
   Button btnShiftWheelsHigh = new JoystickButton(xbox1, rb);
   Button btnShiftWheelsLow = new JoystickButton(xbox1, lb);
 
+  // Button liftToTopHatchButton = new LiftToTopHatchButton();
+  // Button liftToMidHatchButton = new LiftToMiddleHatchButton();
+  // Button liftToBottomHatchButton = new LiftToBottomHatchButton();
+
+  // Button liftToTopBallButton = new LiftToTopBallButton();
+  // Button liftToMidBallButton = new LiftToMiddleBallButton();
+  // Button liftToBottomBallButton = new LiftToBottomBallButton();
+
   Button btnToggleLatch = new JoystickButton(xbox1, start);
+
 
   public OI()
   {
-    // btnGetPanel.whenPressed(new RetrievePanel());
-    // btnDepositPanel.whenPressed(new DepositPanel());    
+     btnGetPanel.whileHeld(new PopAndWait());
+     btnGetPanel.whenReleased(new GrabAndStore());
+
+     btnDepositPanel.whileHeld(new PopAndDeposit());
+     btnDepositPanel.whenReleased(new RetractAndScore());  
+
+    
+    // liftToTopBallButton.whenReleased(new MoveLiftToTop());
+    // liftToMidBallButton.whenReleased(new MoveLiftToMid());
+    // liftToBottomBallButton.whenReleased(new MoveLiftToBottom());
 
     btnLiftTop.whenReleased(new MoveLiftToTop());
     btnLiftMid.whenReleased(new MoveLiftToMid());
     btnLiftBot.whenReleased(new MoveLiftToBottom());
+
+
+
+    // liftToTopHatchButton.whenReleased(new MoveToTopHatch());
+    // liftToMidHatchButton.whenReleased(new MoveToMiddleHatch());
+    // liftToBottomHatchButton.whenReleased(new MoveToMiddleHatch());
     
-    btnEngageBrake.whenReleased(new EngageBrake());
+    btnResetManipulator.whenReleased(new ResetManipulator());
     btnDisengageBrake.whenReleased(new DisengageBrake());
     btnShiftWheelsHigh.whenPressed(new ShiftWheelsHigh());
     btnShiftWheelsLow.whenPressed(new ShiftWheelsLow());

@@ -24,26 +24,27 @@ public class RobotMap {
   public static int CAN_BR_DRIVE_MOTOR = 11;
   public static int CAN_TOP_ACCUMULATOR = 6;
   public static int CAN_BOTTOM_ACCUMULATOR = 5;
-  public static int CAN_TILT = 7;
-  public static int CAN_JACK = 12;
-  public static int CAN_R_CLIMBER = 3;
-  public static int CAN_L_CLIMBER = 2;
+  public static int CAN_TILT = 3;
+  public static int CAN_JACK = 2;
   public static int CAN_CLIMBER_PIVOT = 4;
 
   //PCM Ports
-  public static final int PCM_DRIVE_S_OUT = 6;
-  public static final int PCM_DRIVE_S_IN = 7;
-  public static final int PCM_BRAKE_OUT = 0;
-  public static final int PCM_BRAKE_IN = 1;
+  public static final int PCM_DRIVE_S_OUT = 0;
+  public static final int PCM_DRIVE_S_IN = 1;
+  public static final int PCM_BRAKE_OUT = 3;
+  public static final int PCM_BRAKE_IN = 2;
   public static final int PCM_HATCH_OUT = 4;
   public static final int PCM_HATCH_IN = 5;
-  public static final int PCM_HATCH_CLAMP_OUT = 2;
-  public static final int PCM_HATCH_CLAMP_IN = 3;
+  public static final int PCM_HATCH_CLAMP_OUT = 7;
+  public static final int PCM_HATCH_CLAMP_IN = 6;
 
   //PWM Ports
   public static final int PWM_CAMERA_TILT = 0;
   public static final int PWM_BLINKIN = 5;
-  public static final int PWM_LIFT = 9; 
+  public static final int PWM_TL_LIFT = 6;
+  public static final int PWM_TR_LIFT = 7;
+  public static final int PWM_BL_LIFT = 8;
+  public static final int PWM_BR_LIFT = 9; 
 
   //DIO Ports
 
@@ -58,8 +59,8 @@ public class RobotMap {
   public static final int AI_LIFT_POT = 0;
 
   
-  public static final double TOP_ROCKET_ANGlE = 0.10;
-  public static final double MIDDLE_ROCKET_ANGLE = 0.20;
-  public static final double BOTTOM_ROCKET_ANGLE = 0.35;
-  public static final double BOTTOM_ANGLE = 0.45;
+  public static final double BOTTOM_ROCKET_ANGLE = 0.24;
+  public static final double MIDDLE_ROCKET_ANGLE = 0.35;
+  public static final double TOP_ROCKET_ANGLE = 0.61;
+  public static final double BOTTOM_ANGLE = 0.2;
 }

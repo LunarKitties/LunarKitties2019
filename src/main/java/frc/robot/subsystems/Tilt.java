@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Counter;
@@ -23,7 +24,7 @@ import frc.robot.commands.tilt.OperateTilt;
  */
 public class Tilt extends Subsystem {
   
-  private VictorSPX tilt = new VictorSPX(RobotMap.CAN_TILT);
+  private TalonSRX tilt = new TalonSRX(RobotMap.CAN_TILT);
   private Counter tiltCounter = new Counter(RobotMap.DIO_TILT_COUNTER);
   private DigitalInput tiltSwitch = new DigitalInput(RobotMap.DIO_TILT_SWITCH);
   
@@ -61,7 +62,7 @@ public class Tilt extends Subsystem {
    */
   public boolean isAtTop()
   {
-    return tiltSwitch.get();
+    return !tiltSwitch.get();
   }
 
   public void resetCounter()

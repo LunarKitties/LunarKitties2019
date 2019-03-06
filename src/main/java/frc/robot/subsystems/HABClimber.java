@@ -23,15 +23,13 @@ public class HABClimber extends Subsystem {
   // here. Call these from Commands.
 
   TalonSRX pivotMotor = new TalonSRX(RobotMap.CAN_CLIMBER_PIVOT);
-  TalonSRX rightClimber = new TalonSRX(RobotMap.CAN_R_CLIMBER);
-  TalonSRX leftClimber = new TalonSRX(RobotMap.CAN_L_CLIMBER);
 
   boolean latched = true;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-   // setDefaultCommand(new OperateClimber());
+   setDefaultCommand(new OperateClimber());
   }
 
   public void movePivot(double speed)
@@ -39,11 +37,6 @@ public class HABClimber extends Subsystem {
     pivotMotor.set(ControlMode.PercentOutput, speed);
   }
 
-  public void moveWheels(double speed)
-  {
-    rightClimber.set(ControlMode.PercentOutput, speed);
-    leftClimber.follow(rightClimber);
-  }
 
   public void unlatch()
   {
@@ -67,8 +60,6 @@ public class HABClimber extends Subsystem {
 
   public void log()
   {
-    SmartDashboard.putNumber("Left Climber Wheels", leftClimber.getMotorOutputPercent());
-    SmartDashboard.putNumber("Right Climber Wheels", rightClimber.getMotorOutputPercent());
-    SmartDashboard.putNumber("Climber Pivot", pivotMotor.getMotorOutputPercent());
+      SmartDashboard.putNumber("Climber Pivot", pivotMotor.getMotorOutputPercent());
   }
 }

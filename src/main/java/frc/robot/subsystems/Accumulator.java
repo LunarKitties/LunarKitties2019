@@ -28,6 +28,7 @@ public class Accumulator extends Subsystem {
 
   public Accumulator()
   {
+    topAccum.setInverted(InvertType.InvertMotorOutput);
     bottomAccum.setInverted(InvertType.OpposeMaster);
   }
   @Override

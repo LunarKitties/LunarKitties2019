@@ -5,71 +5,73 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatchmanipulator;
+package frc.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.Lift;
 
-public class RetrievePanel extends Command {
-  boolean done = false;
-  boolean running = false;
-  public RetrievePanel() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.mHatchManipulator);
+public class MoveToMiddleHatch extends Command {
+  boolean rising = false;
+
+  public MoveToMiddleHatch() {
+    requires(Robot.mLift);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    done = false;
-    running = false;
+    Robot.mLift.disengagebrake();
+    SmartDashboard.putData(this);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.mHatchManipulator.pop();
-    if(Robot.mHatchManipulator.isTouching() && !running)
-    {       
-      running = true;
-      new Thread()
-      {
-        public void run()
-        {
-          if(running) {
-          try{
-            Robot.mHatchManipulator.clampHatch();
-            Thread.sleep(250);
-            Robot.mHatchManipulator.retract();
-            } catch(Exception ex){
-            System.err.println("Took to long to get panel!");
-          }
-          done = true;
-          running = false;
-          return;
-        } else {
-          done = true;
-          running = false;
-          return;
-        }
-        }
-      }.start();
-    }
+
+    /*
+      Robot.mLift.run(1);
+      rising = true;
+      Robot.mCameraHandler.setCameraPosition(RobotMap.TOP_ROCKET_ANGlE);
+      */
+
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return done;
+    /*
+    if(rising)
+    {
+      if(Robot.mLift.getLiftHeight() >= Lift.TOP_HEIGHT) {
+          Robot.mLift.engageBrake();
+          Robot.mLift.stop();
+          return true;
+      } else {
+          return false;
+      }
+    } else {
+        if(Robot.mLift.getLiftHeight() <= Lift.TOP_HEIGHT) {
+          Robot.mLift.engageBrake();
+          Robot.mLift.stop();
+          return true;
+        } else {
+          return false;
+        }
+    }
+    */
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    done = false;
-    running = false;
+    Robot.mLift.stop();
+    Robot.mLift.engageBrake();
+    Robot.mCameraHandler.setCameraPosition(RobotMap.TOP_ROCKET_ANGLE);
 
   }
 
@@ -77,8 +79,6 @@ public class RetrievePanel extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    SmartDashboard.putString("Retrieve Panel Status", "Interrupted");
-    done = false;
-    running = false;
+    Robot.mLift.stop();
   }
 }

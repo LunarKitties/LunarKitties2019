@@ -8,10 +8,14 @@
 package frc.robot.commands.hatchmanipulator;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class DepositPanel extends Command {
   boolean done = false;
+
+  boolean running = false;
+
 
   public DepositPanel() {
     // Use requires() here to declare subsystem dependencies
@@ -22,16 +26,22 @@ public class DepositPanel extends Command {
   @Override
   protected void initialize() {
     done = false;
+    running = false;
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.mHatchManipulator.pop();     
+    Robot.mHatchManipulator.pop();
+    if(Robot.mHatchManipulator.isTouching() && !running)
+    {       
+      running = true;
       new Thread()
       {
         public void run()
         {
+          if(running) {
           try{
             Thread.sleep(250);
             Robot.mHatchManipulator.releaseHatch();
@@ -40,9 +50,17 @@ public class DepositPanel extends Command {
             System.err.println("Took to long to get panel!");
           }
           done = true;
+          running = false;
+
+          return;
+        } else {
+          done = true;
+          running = false;
           return;
         }
+        }
       }.start();
+    }
     }
   
 
@@ -56,12 +74,16 @@ public class DepositPanel extends Command {
   @Override
   protected void end() {
     done = false;
+    running = false;
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    SmartDashboard.putString("Deposit Panel Status", "Interrupted");
+
     done = false;
+    running = false;
   }
 }

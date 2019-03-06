@@ -32,7 +32,7 @@ public class DriveWithController extends Command {
     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
     double lt = xbox.getTriggerAxis(Hand.kLeft);
     double rt = xbox.getTriggerAxis(Hand.kRight);
-    double speed = lt - rt;
+    double speed = rt - lt;
 
     //To Rotate you use the Right Joystick X Axis
     double rotate = xbox.getX(Hand.kRight);

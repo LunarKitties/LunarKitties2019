@@ -8,60 +8,71 @@
 package frc.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+import frc.robot.subsystems.Lift;
 
-public class OperateLift extends Command {
-  public OperateLift() {
+public class MoveLiftToHatchGrab extends Command {
+  boolean rising = false;
+
+  public MoveLiftToHatchGrab() {
+    // Use requires() here to declare subsystem dependencies
     requires(Robot.mLift);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.mLift.disengagebrake();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-   
-    double liftSpeed = -Robot.m_oi.getXboxController2().getY(Hand.kLeft);
-    SmartDashboard.putNumber("Lift Speed", liftSpeed);
-    double cameraSpeed = 0;
+      Robot.mLift.run(1);
+      rising = true;
+      Robot.mCameraHandler.setCameraPosition(RobotMap.BOTTOM_ROCKET_ANGLE);
     
-    /*if(liftSpeed < 0) // Lowering
-    		cameraSpeed = -liftSpeed * .02; //Lift comes down faster
-    	else //Raising
-    		cameraSpeed = -liftSpeed *.004; //Move the camera slightly
-    	
-    	Robot.mCameraHandler.adjustCameraPosition(cameraSpeed); //Adjust the camera while operating lift
-      
-     */ 
-    Robot.mLift.run(liftSpeed);
-    if(Robot.mLift.atBottom())
-    {
-      Robot.mCameraHandler.setCameraPosition(RobotMap.BOTTOM_ANGLE);
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(rising)
+    {
+      if(Robot.mLift.getLiftHeight() >= Lift.GRAB_HEIGHT) {
+          Robot.mLift.engageBrake();
+          Robot.mLift.stop();
+          return true;
+      } else {
+          return false;
+      }
+    } else {
+        if(Robot.mLift.getLiftHeight() <= Lift.GRAB_HEIGHT) {
+          Robot.mLift.engageBrake();
+          Robot.mLift.stop();
+          return true;
+        } else {
+          return false;
+        }
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.mLift.stop();
+    Robot.mLift.engageBrake();
+    Robot.mCameraHandler.setCameraPosition(RobotMap.BOTTOM_ROCKET_ANGLE);
+    
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.mLift.stop();
+    Robot.mLift.engageBrake();
+
   }
 }

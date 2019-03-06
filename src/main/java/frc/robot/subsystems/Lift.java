@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,7 +23,12 @@ import frc.robot.commands.lift.OperateLift;
  */
 public class Lift extends Subsystem {
   
-  Talon liftMotor = new Talon(RobotMap.PWM_LIFT);
+  Talon tlMotor = new Talon(RobotMap.PWM_TL_LIFT);
+  Talon blMotor = new Talon(RobotMap.PWM_BL_LIFT);
+  Talon trMotor = new Talon(RobotMap.PWM_TR_LIFT);
+  Talon brMotor = new Talon(RobotMap.PWM_BR_LIFT);
+
+  SpeedControllerGroup liftMotors = new SpeedControllerGroup(tlMotor, blMotor,trMotor,brMotor);
 
   AnalogInput liftPot = new AnalogInput(RobotMap.AI_LIFT_POT);
 
@@ -35,10 +41,15 @@ Hatch Pot Heights
 * height-3.12
 * mid-2.2
 * low-.98
+Ball
+lowball-0.59-------mid1.94--------tall-3.19
+
+
 */
-  public static final double TOP_HEIGHT = 3.12;
-  public static final double MID_HEIGHT = 2.2;
-  public static final double BOT_HEIGHT = 0.98;
+  public static final double TOP_HEIGHT = 2.92;
+  public static final double MID_HEIGHT = 1.67;
+  public static final double BOT_HEIGHT = 0.42;
+  public static final double GRAB_HEIGHT = 0.25;
 
   @Override
   public void initDefaultCommand() {
@@ -51,7 +62,7 @@ Hatch Pot Heights
     SmartDashboard.putNumber("Potentiometer", liftPot.getVoltage());
     SmartDashboard.putNumber("Potentiometer AVG", liftPot.getAverageVoltage());
     SmartDashboard.putBoolean("Brake Engaged", brakeEngaged());
-    SmartDashboard.putNumber("Lift Speed", liftMotor.get());
+    SmartDashboard.putNumber("Lift Speed", liftMotors.get());
   }
 
   /**
@@ -66,7 +77,8 @@ Hatch Pot Heights
     {
       engageBrake();
     }
-    liftMotor.set(speed);
+
+      liftMotors.set(speed);
   }
 
   /**
@@ -89,7 +101,7 @@ Hatch Pot Heights
    * Stops the Lift
    */
   public void stop() {
-    liftMotor.stopMotor();
+    liftMotors.stopMotor();
   }
 
   /**
@@ -110,3 +122,4 @@ Hatch Pot Heights
     return liftPot.getAverageVoltage() <= 0.05;
   }
 }
+ 

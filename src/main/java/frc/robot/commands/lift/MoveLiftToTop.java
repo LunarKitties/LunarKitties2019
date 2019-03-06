@@ -31,7 +31,7 @@ public class MoveLiftToTop extends Command {
 
       Robot.mLift.run(1);
       rising = true;
-      Robot.mCameraHandler.setCameraPosition(RobotMap.TOP_ROCKET_ANGlE);
+      Robot.mCameraHandler.setCameraPosition(RobotMap.MIDDLE_ROCKET_ANGLE);
 
     
   }
@@ -64,7 +64,7 @@ public class MoveLiftToTop extends Command {
   protected void end() {
     Robot.mLift.stop();
     Robot.mLift.engageBrake();
-    Robot.mCameraHandler.setCameraPosition(RobotMap.TOP_ROCKET_ANGlE);
+    Robot.mCameraHandler.setCameraPosition(RobotMap.MIDDLE_ROCKET_ANGLE);
 
   }
 

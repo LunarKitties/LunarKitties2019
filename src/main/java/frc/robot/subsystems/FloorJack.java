@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -23,7 +24,7 @@ import frc.robot.commands.floorjack.OperateJack;
 public class FloorJack extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  VictorSPX jack = new VictorSPX(RobotMap.CAN_JACK);
+  TalonSRX jack = new TalonSRX(RobotMap.CAN_JACK);
   DigitalInput topSensor = new DigitalInput(RobotMap.DIO_JACK_TOP_SWITCH);
   DigitalInput bottomSensor = new DigitalInput(RobotMap.DIO_JACK_BOTTOM_SWITCH);
 
