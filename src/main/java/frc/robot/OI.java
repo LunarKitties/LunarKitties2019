@@ -100,7 +100,12 @@ public class OI {
      btnDepositPanel.whileHeld(new PopAndDeposit());
      btnDepositPanel.whenReleased(new RetractAndScore());  
 
-    
+     
+    //Functions to automatically get panels
+    // btnGetPanel.whenReleased(new RetrievePanel());
+    // btnDepositPanel.whenReleased(new DepositPanel());
+
+
     // liftToTopBallButton.whenReleased(new MoveLiftToTop());
     // liftToMidBallButton.whenReleased(new MoveLiftToMid());
     // liftToBottomBallButton.whenReleased(new MoveLiftToBottom());
