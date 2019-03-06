@@ -11,12 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class RetrievePanel extends Command {
+public class PopDeposit extends Command {
   boolean done = false;
   boolean running = false;
-  public RetrievePanel() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+
+  public PopDeposit() {
     requires(Robot.mHatchManipulator);
   }
 
@@ -31,21 +30,25 @@ public class RetrievePanel extends Command {
   @Override
   protected void execute() {
     Robot.mHatchManipulator.pop();
-    if(Robot.mHatchManipulator.isTouching() && !running)
+    if(!running)
     {       
-      running = true; 
+      running = true;
       new Thread()
       {
         public void run()
         {
           if(running) {
           try{
+            Thread.sleep(50);
             Robot.mHatchManipulator.clampHatch();
+            Thread.sleep(50);
+            Robot.mHatchManipulator.retract();
             } catch(Exception ex){
-            System.err.println("Took to long to get panel!");
+            System.err.println("Took to long to score panel!");
           }
           done = true;
           running = false;
+
           return;
         } else {
           done = true;
@@ -66,18 +69,15 @@ public class RetrievePanel extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.mHatchManipulator.retract();
     done = false;
     running = false;
-
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    SmartDashboard.putString("Retrieve Panel Status", "Interrupted");
-    Robot.mHatchManipulator.retract();
+    SmartDashboard.putString("Pop Deposit", "Interrupted");
 
     done = false;
     running = false;

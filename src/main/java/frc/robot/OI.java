@@ -24,6 +24,7 @@ import frc.robot.commands.hatchmanipulator.DepositPanel;
 import frc.robot.commands.hatchmanipulator.GrabAndStore;
 import frc.robot.commands.hatchmanipulator.PopAndDeposit;
 import frc.robot.commands.hatchmanipulator.PopAndWait;
+import frc.robot.commands.hatchmanipulator.PopDeposit;
 import frc.robot.commands.hatchmanipulator.ResetManipulator;
 import frc.robot.commands.hatchmanipulator.RetractAndScore;
 import frc.robot.commands.hatchmanipulator.RetrievePanel;
@@ -94,15 +95,15 @@ public class OI {
 
   public OI()
   {
-     btnGetPanel.whileHeld(new PopAndWait());
-     btnGetPanel.whenReleased(new GrabAndStore());
+    //  btnGetPanel.whileHeld(new PopAndWait());
+    //  btnGetPanel.whenReleased(new GrabAndStore());
 
-     btnDepositPanel.whileHeld(new PopAndDeposit());
-     btnDepositPanel.whenReleased(new RetractAndScore());  
+      btnDepositPanel.whenReleased(new PopAndDeposit());
+     // btnDepositPanel.whenReleased(new RetractAndScore());  
 
      
     //Functions to automatically get panels
-    // btnGetPanel.whenReleased(new RetrievePanel());
+     btnGetPanel.whenReleased(new RetrievePanel());
     // btnDepositPanel.whenReleased(new DepositPanel());
 
 

@@ -13,7 +13,6 @@ import frc.robot.Robot;
 
 public class DepositPanel extends Command {
   boolean done = false;
-
   boolean running = false;
 
 
@@ -43,7 +42,7 @@ public class DepositPanel extends Command {
         {
           if(running) {
           try{
-            Thread.sleep(250);
+            Thread.sleep(50);
             Robot.mHatchManipulator.releaseHatch();
             Robot.mHatchManipulator.retract();
             } catch(Exception ex){
