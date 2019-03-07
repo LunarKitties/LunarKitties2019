@@ -98,7 +98,7 @@ public class OI {
     //  btnGetPanel.whileHeld(new PopAndWait());
     //  btnGetPanel.whenReleased(new GrabAndStore());
 
-      btnDepositPanel.whenReleased(new PopAndDeposit());
+      btnDepositPanel.whenReleased(new PopDeposit());
      // btnDepositPanel.whenReleased(new RetractAndScore());  
 
      

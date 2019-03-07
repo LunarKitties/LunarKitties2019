@@ -46,13 +46,12 @@ public class PopDeposit extends Command {
             } catch(Exception ex){
             System.err.println("Took to long to score panel!");
           }
-          done = true;
           running = false;
-
+          done = true;
           return;
         } else {
-          done = true;
           running = false;
+          done = true;
           return;
         }
         }
