@@ -78,17 +78,17 @@ public class HatchManipulator extends Subsystem {
   }
   public void log()
   {
-    ShuffleboardTab mainTab =  Shuffleboard.getTab("Main");
-    mainTab.getLayout("Primary", BuiltInLayouts.kList)
-    .withPosition(0, 0)
-    .withSize(2, 2)
-    .add("Have Panel", havePanel());
+    // ShuffleboardTab mainTab =  Shuffleboard.getTab("Main");
+    // mainTab.getLayout("Primary", BuiltInLayouts.kList)
+    // .withPosition(0, 0)
+    // .withSize(2, 2)
+    // .add("Have Panel", havePanel());
     
-    ShuffleboardLayout hatchLayout = mainTab.getLayout("Hatch Manipulator", BuiltInLayouts.kList).withSize(2, 3);
+    // ShuffleboardLayout hatchLayout = mainTab.getLayout("Hatch Manipulator", BuiltInLayouts.kList).withSize(2, 3);
 
-    hatchLayout.add("Popper Out", isPopped());
-    hatchLayout.add("Clamped", isClamped());
-    hatchLayout.add("Touching Hatch", isTouching());
+    // hatchLayout.add("Popper Out", isPopped());
+    // hatchLayout.add("Clamped", isClamped());
+    // hatchLayout.add("Touching Hatch", isTouching());
 
 
     SmartDashboard.putBoolean("Touching Hatch", isTouching());

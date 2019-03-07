@@ -62,11 +62,11 @@ public class Accumulator extends Subsystem {
   {
     SmartDashboard.putBoolean("Ball Grabbed", ballGrabbed());
 
-    Shuffleboard.getTab("Main")
-    .getLayout("Primary", BuiltInLayouts.kList)
-    .withPosition(0, 0)
-    .withSize(2, 2)
-    .add("Ball Grabbed", ballGrabbed());
+    // Shuffleboard.getTab("Main")
+    // .getLayout("Primary", BuiltInLayouts.kList)
+    // .withPosition(0, 0)
+    // .withSize(2, 2)
+    // .add("Ball Grabbed", ballGrabbed());
 
     // SmartDashboard.putNumber("Top Accumulator Speed", topAccum.getMotorOutputPercent());
     // SmartDashboard.putNumber("Bottom Accumulator Speed", bottomAccum.getMotorOutputPercent());

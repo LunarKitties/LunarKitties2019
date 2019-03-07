@@ -142,6 +142,9 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.start();
     // }
+
+    mHatchManipulator.clampHatch();
+    teleopInit();
   }
 
   /**
@@ -152,6 +155,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     mAccumulator.log();
     mHatchManipulator.log();
+    teleopPeriodic();
 
   }
 
@@ -172,7 +176,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
+    mAccumulator.log();
+    mHatchManipulator.log();
     //mTilt.log();
     //mFloorJack.log();
     //mLift.log();
@@ -184,6 +189,8 @@ public class Robot extends TimedRobot {
       mLeds.setColor(LEDS.STROBE_GOLD);
     else if(mAccumulator.ballGrabbed())
       mLeds.setColor(LEDS.ORANGE);
+    else if(!mClimber.isLatched())
+      mLeds.setColor(LEDS.BPM_RAINBOW);
     else
       mLeds.setColor(LEDS.SPECIAL_CHASE);
   }
@@ -193,6 +200,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    mHatchManipulator.releaseHatch();
     SmartDashboard.putData(mCameraHandler);
     
   }

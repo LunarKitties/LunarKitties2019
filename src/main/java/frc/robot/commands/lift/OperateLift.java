@@ -40,10 +40,14 @@ public class OperateLift extends Command {
     	Robot.mCameraHandler.adjustCameraPosition(cameraSpeed); //Adjust the camera while operating lift
       
      */ 
-    Robot.mLift.run(liftSpeed);
-    if(Robot.mLift.atBottom())
+    SmartDashboard.putNumber("Lift speed", liftSpeed);
+    if(Robot.mLift.atBottom() && liftSpeed < 0)
     {
+      Robot.mLift.stop();
       Robot.mCameraHandler.setCameraPosition(RobotMap.BOTTOM_ANGLE);
+    }
+    else {
+      Robot.mLift.run(liftSpeed);
     }
   }
 

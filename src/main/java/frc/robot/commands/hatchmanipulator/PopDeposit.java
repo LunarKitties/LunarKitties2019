@@ -24,6 +24,8 @@ public class PopDeposit extends Command {
   protected void initialize() {
     done = false;
     running = false;
+    Robot.mHatchManipulator.clampHatch();
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,11 +39,11 @@ public class PopDeposit extends Command {
       {
         public void run()
         {
-          if(running) {
           try{
+            Thread.sleep(1000);
+            Robot.mHatchManipulator.releaseHatch();
             Thread.sleep(50);
-            Robot.mHatchManipulator.clampHatch();
-            Thread.sleep(50);
+
             Robot.mHatchManipulator.retract();
             } catch(Exception ex){
             System.err.println("Took to long to score panel!");
@@ -49,11 +51,6 @@ public class PopDeposit extends Command {
           running = false;
           done = true;
           return;
-        } else {
-          running = false;
-          done = true;
-          return;
-        }
         }
       }.start();
     }
