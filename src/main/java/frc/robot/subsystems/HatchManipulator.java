@@ -91,10 +91,10 @@ public class HatchManipulator extends Subsystem {
     hatchLayout.add("Touching Hatch", isTouching());
 
 
-    // SmartDashboard.putBoolean("Touching Hatch", isTouching());
-    // SmartDashboard.putBoolean("Popper Out", popper.get() == Value.kForward);
-    // SmartDashboard.putBoolean("Clamped", clamp.get() == Value.kReverse);
-    // SmartDashboard.putBoolean("Have Panel", havePanel());
+    SmartDashboard.putBoolean("Touching Hatch", isTouching());
+    SmartDashboard.putBoolean("Popper Out", isPopped());
+    SmartDashboard.putBoolean("Clamped", isClamped());
+    SmartDashboard.putBoolean("Have Panel", havePanel());
   }
 
   public boolean havePanel()

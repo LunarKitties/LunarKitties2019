@@ -21,8 +21,8 @@ public class CameraHandler extends Subsystem {
 
     public CameraHandler()
     {
-        setName("Camera Handler");
-        SmartDashboard.putData(cameraTilt);
+        //setName("Camera Handler");
+        //SmartDashboard.putData(cameraTilt);
     }
 	
     public void initDefaultCommand() {
@@ -58,7 +58,7 @@ public class CameraHandler extends Subsystem {
     
     public void log()
     {
-    	SmartDashboard.putNumber("CAMERA HANDLER: Camera Angle", cameraTilt.get());
+    //	SmartDashboard.putNumber("CAMERA HANDLER: Camera Angle", cameraTilt.get());
     }
     
     

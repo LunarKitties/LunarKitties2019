@@ -60,7 +60,7 @@ public class Accumulator extends Subsystem {
 
   public void log()
   {
-    //SmartDashboard.putBoolean("Ball Grabbed", ballGrabbed());
+    SmartDashboard.putBoolean("Ball Grabbed", ballGrabbed());
 
     Shuffleboard.getTab("Main")
     .getLayout("Primary", BuiltInLayouts.kList)

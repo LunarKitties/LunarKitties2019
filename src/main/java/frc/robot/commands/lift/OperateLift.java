@@ -29,7 +29,7 @@ public class OperateLift extends Command {
 
    
     double liftSpeed = -Robot.m_oi.getXboxController2().getY(Hand.kLeft);
-    SmartDashboard.putNumber("Lift Speed", liftSpeed);
+    //SmartDashboard.putNumber("Lift Speed", liftSpeed);
     double cameraSpeed = 0;
     
     /*if(liftSpeed < 0) // Lowering
