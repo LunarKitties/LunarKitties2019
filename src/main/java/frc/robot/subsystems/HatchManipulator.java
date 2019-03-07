@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.hatchmanipulator.MonitorHatch;
@@ -74,10 +78,23 @@ public class HatchManipulator extends Subsystem {
   }
   public void log()
   {
-    SmartDashboard.putBoolean("Hatch Panel Pressed", isTouching());
-    SmartDashboard.putBoolean("Popper Popped Out", popper.get() == Value.kForward);
-    SmartDashboard.putBoolean("Clamp Clamped", clamp.get() == Value.kReverse);
-    SmartDashboard.putBoolean("Have Panel", havePanel());
+    ShuffleboardTab mainTab =  Shuffleboard.getTab("Main");
+    mainTab.getLayout("Primary", BuiltInLayouts.kList)
+    .withPosition(0, 0)
+    .withSize(2, 2)
+    .add("Have Panel", havePanel());
+    
+    ShuffleboardLayout hatchLayout = mainTab.getLayout("Hatch Manipulator", BuiltInLayouts.kList).withSize(2, 3);
+
+    hatchLayout.add("Popper Out", isPopped());
+    hatchLayout.add("Clamped", isClamped());
+    hatchLayout.add("Touching Hatch", isTouching());
+
+
+    // SmartDashboard.putBoolean("Touching Hatch", isTouching());
+    // SmartDashboard.putBoolean("Popper Out", popper.get() == Value.kForward);
+    // SmartDashboard.putBoolean("Clamped", clamp.get() == Value.kReverse);
+    // SmartDashboard.putBoolean("Have Panel", havePanel());
   }
 
   public boolean havePanel()
@@ -90,7 +107,7 @@ public class HatchManipulator extends Subsystem {
     return popper.get() == Value.kForward;
   }
 
-  public boolean isClamp()
+  public boolean isClamped()
   {
     return clamp.get() == Value.kReverse;
   }

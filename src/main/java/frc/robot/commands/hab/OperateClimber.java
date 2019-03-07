@@ -26,16 +26,10 @@ public class OperateClimber extends Command {
   @Override
   protected void execute() {
     XboxController xbox = Robot.m_oi.getXboxController1();
-    double pivot = -xbox.getY(Hand.kRight);
-    
-
-     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
-     double lt = xbox.getTriggerAxis(Hand.kLeft);
-     double rt = xbox.getTriggerAxis(Hand.kRight);
-     double speed = lt - rt;
+    double pivot = xbox.getY(Hand.kRight);
 
      if(!Robot.mClimber.isLatched()) {
-      Robot.mClimber.movePivot(pivot * .5);
+      Robot.mClimber.movePivot(pivot);
      }
   }
 

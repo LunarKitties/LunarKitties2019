@@ -36,7 +36,7 @@ public class MonitorHatch extends Command {
 
     if(Robot.m_oi.getXboxController2().getBumperReleased(Hand.kLeft))
     {
-      if(Robot.mHatchManipulator.isClamp())
+      if(Robot.mHatchManipulator.isClamped())
       {
         Robot.mHatchManipulator.releaseHatch();
       } else {

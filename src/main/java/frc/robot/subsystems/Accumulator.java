@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.accumulator.OperateAccumulator;
@@ -58,8 +60,15 @@ public class Accumulator extends Subsystem {
 
   public void log()
   {
-    SmartDashboard.putBoolean("Ball Grabbed", ballGrabbed());
-    SmartDashboard.putNumber("Top Accumulator Speed", topAccum.getMotorOutputPercent());
-    SmartDashboard.putNumber("Bottom Accumulator Speed", bottomAccum.getMotorOutputPercent());
+    //SmartDashboard.putBoolean("Ball Grabbed", ballGrabbed());
+
+    Shuffleboard.getTab("Main")
+    .getLayout("Primary", BuiltInLayouts.kList)
+    .withPosition(0, 0)
+    .withSize(2, 2)
+    .add("Ball Grabbed", ballGrabbed());
+
+    // SmartDashboard.putNumber("Top Accumulator Speed", topAccum.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Bottom Accumulator Speed", bottomAccum.getMotorOutputPercent());
   }
 }

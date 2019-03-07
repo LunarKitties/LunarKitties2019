@@ -77,23 +77,17 @@ public class Robot extends TimedRobot {
     //Make sure OI is last
     m_oi = new OI();
    
-    mHatchManipulator.releaseHatch();
 
     c = new Compressor(0);
-
     c.setClosedLoopControl(true);
-    
-    mCameraHandler.setToBottom();
+
+    mHatchManipulator.releaseHatch();
+    mHatchManipulator.retract();
 		
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setBrightness(50);
     camera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
-        mCameraHandler.setCameraPosition(RobotMap.BOTTOM_ANGLE);
-
-
-    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    //SmartDashboard.putData("Auto mode", m_chooser);
+    mCameraHandler.setCameraPosition(RobotMap.BOTTOM_ANGLE);
   }
 
   /**
@@ -135,7 +129,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+   // m_autonomousCommand = m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -144,10 +138,10 @@ public class Robot extends TimedRobot {
      * autonomousCommand = new ExampleCommand(); break; }
      */
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    // // schedule the autonomous command (example)
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.start();
+    // }
   }
 
   /**
@@ -156,6 +150,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    mAccumulator.log();
+    mHatchManipulator.log();
+
   }
 
   @Override
@@ -164,9 +161,9 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
+    // }
   }
 
   /**
@@ -176,20 +173,19 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     
-    mTilt.log();
-    mAccumulator.log();
-    mFloorJack.log();
-    mHatchManipulator.log();
-    mLift.log();
-    mClimber.log();
+    //mTilt.log();
+    //mFloorJack.log();
+    //mLift.log();
+    //mClimber.log();
+    
 
         
     if(mHatchManipulator.havePanel())
-    mLeds.setColor(LEDS.STROBE_GOLD);
-  else if(mAccumulator.ballGrabbed())
-    mLeds.setColor(LEDS.ORANGE);
-  else
-    mLeds.setColor(LEDS.SPECIAL_CHASE);
+      mLeds.setColor(LEDS.STROBE_GOLD);
+    else if(mAccumulator.ballGrabbed())
+      mLeds.setColor(LEDS.ORANGE);
+    else
+      mLeds.setColor(LEDS.SPECIAL_CHASE);
   }
 
   /**
