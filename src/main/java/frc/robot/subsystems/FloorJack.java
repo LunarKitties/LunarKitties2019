@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.floorjack.OperateJack;
 
@@ -53,6 +54,7 @@ public class FloorJack extends Subsystem {
   public void stop()
   {
     jack.set(ControlMode.PercentOutput, 0);
+    Robot.mLeds.setColor(LEDS.STROBE_RED);
   }
 
   public boolean atTop()

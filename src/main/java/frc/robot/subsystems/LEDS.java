@@ -26,6 +26,7 @@ public static final double CHASE_RED = -0.31;
 public static final double SPECIAL_CHASE = .45;
 public static final double SLOW_BREATHE_COLOR2 = 0.29;
 public static final double BPM_RAINBOW = -0.69;
+public static final double STROBE_RED = -0.11;
   public void initDefaultCommand() {
       // Set the default command for a subsystem here.
       //setDefaultCommand(new MySpecialCommand());

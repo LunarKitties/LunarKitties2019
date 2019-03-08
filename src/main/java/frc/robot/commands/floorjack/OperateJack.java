@@ -24,8 +24,14 @@ public class OperateJack extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double speed = -Robot.m_oi.getXboxController1().getY(Hand.kLeft);
     if(!Robot.mClimber.isLatched()) {
-      Robot.mFloorJack.run(-Robot.m_oi.getXboxController1().getY(Hand.kLeft));
+      if(speed < 0 && Robot.mFloorJack.atBottom())
+        Robot.mFloorJack.stop();
+      else if (speed > 0 && Robot.mFloorJack.atTop())
+        Robot.mFloorJack.stop();
+      else
+        Robot.mFloorJack.run(speed);
     }
   }
 
