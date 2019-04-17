@@ -30,7 +30,7 @@ public class Tilt extends Subsystem {
   
   public Tilt()
   {
-    tilt.setInverted(InvertType.InvertMotorOutput);
+    tilt.setInverted(InvertType.None);
   }
   @Override
   public void initDefaultCommand() {
