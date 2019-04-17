@@ -38,7 +38,7 @@ public class CameraHandler extends Subsystem {
     	// else if(angle < BOTTOM_ANGLE)
     	// 	angle = BOTTOM_ANGLE;
     	
-    	cameraTilt.set(angle);
+  //  	cameraTilt.set(angle);
     }
     
     public void adjustCameraPosition(double angle)

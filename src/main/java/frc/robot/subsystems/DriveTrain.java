@@ -82,4 +82,9 @@ public class DriveTrain extends Subsystem {
   {
     dd.stopMotor();
   }
+
+  public boolean isHighGear()
+  {
+    return shifters.get() == Value.kForward;
+  }
 }

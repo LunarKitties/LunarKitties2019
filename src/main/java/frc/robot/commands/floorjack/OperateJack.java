@@ -26,11 +26,11 @@ public class OperateJack extends Command {
   protected void execute() {
     double speed = -Robot.m_oi.getXboxController1().getY(Hand.kLeft);
     if(!Robot.mClimber.isLatched()) {
-      if(speed < 0 && Robot.mFloorJack.atBottom())
-        Robot.mFloorJack.stop();
-      else if (speed > 0 && Robot.mFloorJack.atTop())
-        Robot.mFloorJack.stop();
-      else
+      // if(speed < 0 && Robot.mFloorJack.atBottom())
+      //   Robot.mFloorJack.stop();
+      // else if (speed > 0 && Robot.mFloorJack.atTop())
+      //   Robot.mFloorJack.stop();
+      // else
         Robot.mFloorJack.run(speed);
     }
   }

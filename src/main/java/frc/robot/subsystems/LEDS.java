@@ -22,7 +22,7 @@ public static final double STROBE_GOLD = -0.07;
 public static final double STROBE_BLUE = -0.09;
 public static final double ORANGE = 0.65;
 //-0.31
-public static final double CHASE_RED = -0.31;
+public static final double CHASE_RED = -0.35;
 public static final double SPECIAL_CHASE = .45;
 public static final double SLOW_BREATHE_COLOR2 = 0.29;
 public static final double BPM_RAINBOW = -0.69;

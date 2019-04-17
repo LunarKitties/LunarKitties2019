@@ -179,7 +179,7 @@ public class Robot extends TimedRobot {
     mAccumulator.log();
     mHatchManipulator.log();
     //mTilt.log();
-    //mFloorJack.log();
+     mFloorJack.log();
     //mLift.log();
     //mClimber.log();
     
@@ -191,8 +191,10 @@ public class Robot extends TimedRobot {
       mLeds.setColor(LEDS.ORANGE);
     else if(!mClimber.isLatched())
       mLeds.setColor(LEDS.BPM_RAINBOW);
+    else if (mDriveTrain.isHighGear())
+      mLeds.setColor(LEDS.RAINBOW);
     else
-      mLeds.setColor(LEDS.SPECIAL_CHASE);
+      mLeds.setColor(LEDS.CHASE_RED);
   }
 
   /**
