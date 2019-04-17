@@ -69,7 +69,7 @@ public class Robot extends TimedRobot {
     mAccumulator = new Accumulator();
     mCameraHandler = new CameraHandler();
     mDriveTrain = new DriveTrain();
-    mHatchManipulator = new HatchManipulator();
+    // mHatchManipulator = new HatchManipulator();
     mFloorJack = new FloorJack();
     mClimber = new HABClimber();
     mLift = new Lift();
@@ -81,8 +81,8 @@ public class Robot extends TimedRobot {
     c = new Compressor(0);
     c.setClosedLoopControl(true);
 
-    mHatchManipulator.releaseHatch();
-    mHatchManipulator.retract();
+    // mHatchManipulator.releaseHatch();
+    // mHatchManipulator.retract();
 		
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setBrightness(50);
@@ -143,7 +143,7 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.start();
     // }
 
-    mHatchManipulator.clampHatch();
+    // mHatchManipulator.clampHatch();
     teleopInit();
   }
 
@@ -154,7 +154,7 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
     mAccumulator.log();
-    mHatchManipulator.log();
+    // mHatchManipulator.log();
     teleopPeriodic();
 
   }
@@ -177,7 +177,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     mAccumulator.log();
-    mHatchManipulator.log();
+    // mHatchManipulator.log();
     mTilt.log();
      mFloorJack.log();
     //mLift.log();
@@ -198,7 +198,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    mHatchManipulator.releaseHatch();
+    // mHatchManipulator.releaseHatch();
     SmartDashboard.putData(mCameraHandler);
     
   }

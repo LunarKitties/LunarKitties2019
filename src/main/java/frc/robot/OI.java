@@ -36,6 +36,9 @@ import frc.robot.commands.lift.MoveLiftToMid;
 import frc.robot.commands.lift.MoveLiftToTop;
 import frc.robot.commands.lift.MoveToMiddleHatch;
 import frc.robot.commands.lift.MoveToTopHatch;
+import frc.robot.commands.tilt.SetTiltLatch;
+import frc.robot.commands.tilt.ToggleTiltLatch;
+import frc.robot.commands.tilt.UnSetTiltLatch;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -69,14 +72,14 @@ public class OI {
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
 
-  Button btnSetTiltLatch = new JoystickButton(xbox2, rb);
+  Button btnSetTiltLatch = new JoystickButton(xbox2, x);
   Button btnUnSetTiltLatch = new JoystickButton(xbox2,lb);
 
   Button btnLiftTop = new JoystickButton(xbox2, y);
   Button btnLiftMid = new JoystickButton(xbox2, b);
   Button btnLiftBot = new JoystickButton(xbox2, a);
  
-  Button btnResetManipulator = new JoystickButton(xbox2, x);
+  // Button btnResetManipulator = new JoystickButton(xbox2, x);
   Button btnDisengageBrake = new JoystickButton(xbox2, start);
 
   Button btnShiftWheelsHigh = new JoystickButton(xbox1, rb);
@@ -94,14 +97,15 @@ public class OI {
     btnLiftBot.whenReleased(new MoveLiftToBottom());
 
     
-    btnResetManipulator.whenReleased(new ResetManipulator());
+    // btnResetManipulator.whenReleased(new ResetManipulator());
     btnDisengageBrake.whenReleased(new DisengageBrake());
     btnShiftWheelsHigh.whenPressed(new ShiftWheelsHigh());
     btnShiftWheelsLow.whenPressed(new ShiftWheelsLow());
 
     btnToggleLatch.whenReleased(new ToggleLatch());
-    btnSetTiltLatch
-  
+    btnSetTiltLatch.whenReleased(new ToggleTiltLatch());
+
+
   }
   /**
    * Get the Xbox Controller plugged into port 0

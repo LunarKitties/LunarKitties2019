@@ -32,7 +32,7 @@ public class OperateTilt extends Command {
     //If the Tilt Latch is set, keep the tilt up.
     if(Robot.mTilt.isLatched())
     {
-      if(speed < 0)
+      if(speed < -0.2)
       {
         Robot.mTilt.unlatch();
       }
@@ -40,7 +40,7 @@ public class OperateTilt extends Command {
       //Check to see if the tilt is triggering the switch
       //We want to make sure that we're not trying to lower down.
       //If we are, we need to unlatch
-      if(!Robot.mTilt.isAtTop() && !(speed < 0))
+      if(!Robot.mTilt.isAtTop() && !(speed < -0.2))
       {
         //If Not, set the speed to tilt up by .5 (half power) 
         speed = .5;
@@ -50,7 +50,7 @@ public class OperateTilt extends Command {
 
     //We can only move the lift if the speed is negative (lower tilt)
     // or whenever the robot isn't at the top. This is to prevent burning motors
-   if(speed < 0 || !Robot.mTilt.isAtTop())
+   if(speed < -.20 || !Robot.mTilt.isAtTop())
       Robot.mTilt.run(speed);
     else
       Robot.mTilt.stop();
