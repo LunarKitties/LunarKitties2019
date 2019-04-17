@@ -178,23 +178,19 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     mAccumulator.log();
     mHatchManipulator.log();
-    //mTilt.log();
+    mTilt.log();
      mFloorJack.log();
     //mLift.log();
     //mClimber.log();
     
-
-        
-    if(mHatchManipulator.havePanel())
+    if(mAccumulator.ballGrabbed())
       mLeds.setColor(LEDS.STROBE_GOLD);
-    else if(mAccumulator.ballGrabbed())
-      mLeds.setColor(LEDS.ORANGE);
     else if(!mClimber.isLatched())
       mLeds.setColor(LEDS.BPM_RAINBOW);
     else if (mDriveTrain.isHighGear())
-      mLeds.setColor(LEDS.RAINBOW);
+      mLeds.setColor(LEDS.LAWN_GREEN);
     else
-      mLeds.setColor(LEDS.CHASE_RED);
+      mLeds.setColor(LEDS.RED);
   }
 
   /**

@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -68,9 +69,8 @@ public class OI {
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
 
-  //LiftBallControlButtons liftBallControlButtons = new LiftBallControlButtons(xbox2);
-  Button btnGetPanel = new JoystickButton(xbox2, rb);
-  Button btnDepositPanel = new JoystickButton(xbox2, lb);
+  Button btnSetTiltLatch = new JoystickButton(xbox2, rb);
+  Button btnUnSetTiltLatch = new JoystickButton(xbox2,lb);
 
   Button btnLiftTop = new JoystickButton(xbox2, y);
   Button btnLiftMid = new JoystickButton(xbox2, b);
@@ -82,44 +82,17 @@ public class OI {
   Button btnShiftWheelsHigh = new JoystickButton(xbox1, rb);
   Button btnShiftWheelsLow = new JoystickButton(xbox1, lb);
 
-  // Button liftToTopHatchButton = new LiftToTopHatchButton();
-  // Button liftToMidHatchButton = new LiftToMiddleHatchButton();
-  // Button liftToBottomHatchButton = new LiftToBottomHatchButton();
-
-  // Button liftToTopBallButton = new LiftToTopBallButton();
-  // Button liftToMidBallButton = new LiftToMiddleBallButton();
-  // Button liftToBottomBallButton = new LiftToBottomBallButton();
-
   Button btnToggleLatch = new JoystickButton(xbox1, start);
 
 
   public OI()
   {
-    //  btnGetPanel.whileHeld(new PopAndWait());
-    //  btnGetPanel.whenReleased(new GrabAndStore());
-
-      btnDepositPanel.whenReleased(new PopDeposit());
-     // btnDepositPanel.whenReleased(new RetractAndScore());  
-
-     
-    //Functions to automatically get panels
-     btnGetPanel.whenReleased(new RetrievePanel());
-    // btnDepositPanel.whenReleased(new DepositPanel());
-
-
-    // liftToTopBallButton.whenReleased(new MoveLiftToTop());
-    // liftToMidBallButton.whenReleased(new MoveLiftToMid());
-    // liftToBottomBallButton.whenReleased(new MoveLiftToBottom());
-
+    
+    
     btnLiftTop.whenReleased(new MoveLiftToTop());
     btnLiftMid.whenReleased(new MoveLiftToMid());
     btnLiftBot.whenReleased(new MoveLiftToBottom());
 
-
-
-    // liftToTopHatchButton.whenReleased(new MoveToTopHatch());
-    // liftToMidHatchButton.whenReleased(new MoveToMiddleHatch());
-    // liftToBottomHatchButton.whenReleased(new MoveToMiddleHatch());
     
     btnResetManipulator.whenReleased(new ResetManipulator());
     btnDisengageBrake.whenReleased(new DisengageBrake());
@@ -127,6 +100,8 @@ public class OI {
     btnShiftWheelsLow.whenPressed(new ShiftWheelsLow());
 
     btnToggleLatch.whenReleased(new ToggleLatch());
+    btnSetTiltLatch
+  
   }
   /**
    * Get the Xbox Controller plugged into port 0

@@ -27,6 +27,7 @@ public class Tilt extends Subsystem {
   private TalonSRX tilt = new TalonSRX(RobotMap.CAN_TILT);
   private Counter tiltCounter = new Counter(RobotMap.DIO_TILT_COUNTER);
   private DigitalInput tiltSwitch = new DigitalInput(RobotMap.DIO_TILT_SWITCH);
+  private boolean latched = false;
   
   public Tilt()
   {
@@ -38,6 +39,27 @@ public class Tilt extends Subsystem {
     setDefaultCommand(new OperateTilt());
   }
 
+  
+  public void unlatch()
+  {
+    latched = false;
+  }
+
+  public void latch()
+  {
+    latched = true;
+  }
+
+  public void toggleLatch()
+  {
+    latched = !latched;
+  }
+
+  public boolean isLatched()
+  {
+    return latched;
+  }
+
   /**
    * Puts data on SmartDashboard
    */
@@ -45,6 +67,7 @@ public class Tilt extends Subsystem {
   {
     SmartDashboard.putNumber("Tilt Counter", tiltCounter.get());
     SmartDashboard.putBoolean("At Top", isAtTop());
+    SmartDashboard.putBoolean("Keep Tilt Up?", isLatched());
     SmartDashboard.putNumber("Tilt Speed", tilt.getMotorOutputPercent());
   }
 

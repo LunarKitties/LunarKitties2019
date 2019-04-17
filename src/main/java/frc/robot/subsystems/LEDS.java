@@ -21,6 +21,8 @@ public static final double RAINBOW = -0.99;
 public static final double STROBE_GOLD = -0.07;
 public static final double STROBE_BLUE = -0.09;
 public static final double ORANGE = 0.65;
+public static final double LAWN_GREEN = 0.71;
+public static final double RED = 0.61;
 //-0.31
 public static final double CHASE_RED = -0.35;
 public static final double SPECIAL_CHASE = .45;
