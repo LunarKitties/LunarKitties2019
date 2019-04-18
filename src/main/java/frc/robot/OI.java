@@ -18,6 +18,7 @@ import frc.robot.buttons.LiftBallControlButtons;
 import frc.robot.buttons.LiftBallControlButtons.LiftToBottomBallButton;
 import frc.robot.buttons.LiftBallControlButtons.LiftToMiddleBallButton;
 import frc.robot.buttons.LiftBallControlButtons.LiftToTopBallButton;
+import frc.robot.commands.ProcessCargo;
 import frc.robot.commands.drivetrain.ShiftWheelsHigh;
 import frc.robot.commands.drivetrain.ShiftWheelsLow;
 import frc.robot.commands.hab.ToggleLatch;
@@ -75,18 +76,17 @@ public class OI {
   Button btnSetTiltLatch = new JoystickButton(xbox2, x);
   Button btnUnSetTiltLatch = new JoystickButton(xbox2,lb);
 
+  Button btnGetCargo = new JoystickButton(xbox2, rb);
   Button btnLiftTop = new JoystickButton(xbox2, y);
   Button btnLiftMid = new JoystickButton(xbox2, b);
   Button btnLiftBot = new JoystickButton(xbox2, a);
  
-  // Button btnResetManipulator = new JoystickButton(xbox2, x);
   Button btnDisengageBrake = new JoystickButton(xbox2, start);
 
   Button btnShiftWheelsHigh = new JoystickButton(xbox1, rb);
   Button btnShiftWheelsLow = new JoystickButton(xbox1, lb);
 
   Button btnToggleLatch = new JoystickButton(xbox1, start);
-
 
   public OI()
   {
@@ -105,7 +105,7 @@ public class OI {
     btnToggleLatch.whenReleased(new ToggleLatch());
     btnSetTiltLatch.whenReleased(new ToggleTiltLatch());
 
-
+    btnGetCargo.whenReleased(new ProcessCargo());
   }
   /**
    * Get the Xbox Controller plugged into port 0

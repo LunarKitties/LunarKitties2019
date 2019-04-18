@@ -43,7 +43,7 @@ public class OperateTilt extends Command {
       if(!Robot.mTilt.isAtTop() && !(speed < -0.2))
       {
         //If Not, set the speed to tilt up by .5 (half power) 
-        speed = .5;
+        speed = 1;
       } 
       
     }
@@ -72,6 +72,5 @@ public class OperateTilt extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.mTilt.stop();
   }
 }

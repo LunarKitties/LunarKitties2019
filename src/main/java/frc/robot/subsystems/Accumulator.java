@@ -28,6 +28,7 @@ public class Accumulator extends Subsystem {
   TalonSRX bottomAccum = new TalonSRX(RobotMap.CAN_BOTTOM_ACCUMULATOR);
   DigitalInput grabSwitch = new DigitalInput(RobotMap.DIO_ACCUMULATOR_SWITCH);
 
+  boolean runningAutomatic = false;
   public Accumulator()
   {
     topAccum.setInverted(InvertType.InvertMotorOutput);

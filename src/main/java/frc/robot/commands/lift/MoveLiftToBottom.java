@@ -30,9 +30,7 @@ public class MoveLiftToBottom extends Command {
   protected void execute() {
 
       Robot.mLift.run(1);
-      rising = true;
-      Robot.mCameraHandler.setCameraPosition(RobotMap.BOTTOM_ROCKET_ANGLE);
-    
+      rising = true;    
   }
 
   // Make this return true when this Command no longer needs to run execute()
