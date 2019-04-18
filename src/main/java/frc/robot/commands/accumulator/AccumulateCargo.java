@@ -25,12 +25,7 @@ public class AccumulateCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-        //Get Controller 2
-        XboxController xbox = Robot.m_oi.getXboxController2();
-
-        //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
-        double rt = xbox.getTriggerAxis(Hand.kRight);
-        Robot.mAccumulator.run(rt);
+        Robot.mAccumulator.run(1);
 
   }
 
