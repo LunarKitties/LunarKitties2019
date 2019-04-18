@@ -20,7 +20,7 @@ public class ToggleLatch extends Command {
   @Override
   protected void initialize() {
     Robot.mClimber.toggleLatch();
-    Robot.mClimber.latch();
+    Robot.mTilt.latch();
   }
 
   // Called repeatedly when this Command is scheduled to run

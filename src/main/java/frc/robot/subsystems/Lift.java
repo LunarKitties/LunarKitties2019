@@ -48,7 +48,7 @@ lowball-0.59-------mid1.94--------tall-3.19
 */
   public static final double TOP_HEIGHT = 2.92;
   public static final double MID_HEIGHT = 1.67;
-  public static final double BOT_HEIGHT = 0.42;
+  public static final double BOT_HEIGHT = 0.5;
   public static final double GRAB_HEIGHT = 0.25;
 
   @Override

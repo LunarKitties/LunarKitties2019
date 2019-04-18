@@ -8,11 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.commands.accumulator.AccumulateCargo;
 import frc.robot.commands.lift.MoveLiftToBottom;
 import frc.robot.commands.tilt.RaiseTiltToTop;
-
+import frc.robot.commands.tilt.SetTiltLatch;
+import frc.robot.subsystems.LEDS;
 public class ProcessCargo extends CommandGroup {
   /**
    * Run the accumulator using the triggers.
@@ -21,11 +24,14 @@ public class ProcessCargo extends CommandGroup {
    * Then the tilt will be raised all the way up ready to score.
    */
   public ProcessCargo() {
-    SmartDashboard.putBoolean("Processing Cargo", true);
-    addSequential(new AccumulateCargo());
+    Robot.processingCargo = true;
+    SmartDashboard.putBoolean("Processing Cargo", Robot.processingCargo);
+    addSequential(new AccumulateCargo(),3);
+    addSequential(new WaitCommand(.5));
     addSequential(new MoveLiftToBottom(),3);
-    addSequential(new RaiseTiltToTop(),3);    
-    SmartDashboard.putBoolean("Processing Cargo", false);
+    addSequential(new RaiseTiltToTop(),3);  
+    addParallel(new SetTiltLatch());  
+    SmartDashboard.putBoolean("Processing Cargo", Robot.processingCargo);
   }
 
 }

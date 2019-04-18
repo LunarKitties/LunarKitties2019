@@ -41,6 +41,7 @@ public class RaiseTiltToTop extends Command {
   @Override
   protected void end() {
     Robot.mTilt.stop();
+    Robot.processingCargo = false;
   }
 
   // Called when another command which requires one or more of the same

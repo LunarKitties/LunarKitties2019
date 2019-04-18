@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
   public static Tilt mTilt;
 	Compressor c;
 
+  public static boolean processingCargo = false;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -81,6 +82,7 @@ public class Robot extends TimedRobot {
     c = new Compressor(0);
     c.setClosedLoopControl(true);
 
+    processingCargo = false;
     // mHatchManipulator.releaseHatch();
     // mHatchManipulator.retract();
 		
@@ -144,6 +146,7 @@ public class Robot extends TimedRobot {
     // }
 
     // mHatchManipulator.clampHatch();
+    Robot.mTilt.latch();
     teleopInit();
   }
 
@@ -182,8 +185,9 @@ public class Robot extends TimedRobot {
      mFloorJack.log();
     //mLift.log();
     //mClimber.log();
-    
-    if(mAccumulator.ballGrabbed())
+    if(processingCargo)
+      mLeds.setColor(LEDS.STROBE_BLUE);
+    else if(mAccumulator.ballGrabbed())
       mLeds.setColor(LEDS.STROBE_GOLD);
     else if(!mClimber.isLatched())
       mLeds.setColor(LEDS.BPM_RAINBOW);
