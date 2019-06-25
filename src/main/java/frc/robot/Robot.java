@@ -22,7 +22,6 @@ import frc.robot.subsystems.CameraHandler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.FloorJack;
 import frc.robot.subsystems.HABClimber;
-import frc.robot.subsystems.HatchManipulator;
 import frc.robot.subsystems.LEDS;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Tilt;
@@ -49,7 +48,6 @@ public class Robot extends TimedRobot {
   public static CameraHandler mCameraHandler;
   public static DriveTrain mDriveTrain;
   public static HABClimber mClimber;
-  public static HatchManipulator mHatchManipulator;
   public static FloorJack mFloorJack;
   public static Lift mLift;
   public static LEDS mLeds;
@@ -70,7 +68,6 @@ public class Robot extends TimedRobot {
     mAccumulator = new Accumulator();
     mCameraHandler = new CameraHandler();
     mDriveTrain = new DriveTrain();
-    // mHatchManipulator = new HatchManipulator();
     mFloorJack = new FloorJack();
     mClimber = new HABClimber();
     mLift = new Lift();

@@ -21,15 +21,11 @@ import frc.robot.buttons.LiftBallControlButtons.LiftToTopBallButton;
 import frc.robot.commands.ProcessCargo;
 import frc.robot.commands.drivetrain.ShiftWheelsHigh;
 import frc.robot.commands.drivetrain.ShiftWheelsLow;
+import frc.robot.commands.hab.StepOneIn;
+import frc.robot.commands.hab.StepOneOut;
+import frc.robot.commands.hab.StepTwoIn;
+import frc.robot.commands.hab.StepTwoOut;
 import frc.robot.commands.hab.ToggleLatch;
-import frc.robot.commands.hatchmanipulator.DepositPanel;
-import frc.robot.commands.hatchmanipulator.GrabAndStore;
-import frc.robot.commands.hatchmanipulator.PopAndDeposit;
-import frc.robot.commands.hatchmanipulator.PopAndWait;
-import frc.robot.commands.hatchmanipulator.PopDeposit;
-import frc.robot.commands.hatchmanipulator.ResetManipulator;
-import frc.robot.commands.hatchmanipulator.RetractAndScore;
-import frc.robot.commands.hatchmanipulator.RetrievePanel;
 import frc.robot.commands.lift.DisengageBrake;
 import frc.robot.commands.lift.EngageBrake;
 import frc.robot.commands.lift.MoveLiftToBottom;
@@ -73,6 +69,12 @@ public class OI {
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
 
+  Button btnPopOne = new JoystickButton(xbox1,a);
+  Button btnPopTwo = new JoystickButton(xbox1,x);
+  Button btnPullOne = new JoystickButton(xbox1,b);
+  Button btnPullTwo = new JoystickButton(xbox1,y);
+  
+
   Button btnSetTiltLatch = new JoystickButton(xbox2, x);
   Button btnUnSetTiltLatch = new JoystickButton(xbox2,lb);
 
@@ -106,6 +108,13 @@ public class OI {
     btnSetTiltLatch.whenReleased(new ToggleTiltLatch());
 
     btnGetCargo.whenReleased(new ProcessCargo());
+
+
+    btnPopOne.whenReleased(new StepOneOut());
+    btnPopTwo.whenReleased(new StepTwoOut());
+    btnPullOne.whenReleased(new StepOneIn());
+    btnPullTwo.whenReleased(new StepTwoIn());
+    
   }
   /**
    * Get the Xbox Controller plugged into port 0

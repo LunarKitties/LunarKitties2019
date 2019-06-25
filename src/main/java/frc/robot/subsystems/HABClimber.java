@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
@@ -23,13 +25,35 @@ public class HABClimber extends Subsystem {
   // here. Call these from Commands.
 
   TalonSRX pivotMotor = new TalonSRX(RobotMap.CAN_CLIMBER_PIVOT);
-
+  DoubleSolenoid stepOne = new DoubleSolenoid(RobotMap.PCM_JACK_ONE_IN, RobotMap.PCM_JACK_ONE_OUT);
+  DoubleSolenoid stepTwo = new DoubleSolenoid(RobotMap.PCM_JACK_TWO_IN, RobotMap.PCM_JACK_TWO_OUT);
   boolean latched = true;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
    setDefaultCommand(new OperateClimber());
+  }
+
+
+  public void popStepOneOut()
+  {
+    stepOne.set(Value.kForward);
+  }
+
+  public void popStepTwoOut()
+  {
+    stepTwo.set(Value.kForward);
+  }
+
+  public void pullStepOneIn()
+  {
+    stepOne.set(Value.kReverse);
+  }
+
+  public void pullStepTwoIn()
+  {
+    stepTwo.set(Value.kReverse);;
   }
 
   public void movePivot(double speed)

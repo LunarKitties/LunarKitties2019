@@ -33,10 +33,10 @@ public class RobotMap {
   public static final int PCM_DRIVE_S_IN = 1;
   public static final int PCM_BRAKE_OUT = 3;
   public static final int PCM_BRAKE_IN = 2;
-  public static final int PCM_HATCH_OUT = 4;
-  public static final int PCM_HATCH_IN = 5;
-  public static final int PCM_HATCH_CLAMP_OUT = 7;
-  public static final int PCM_HATCH_CLAMP_IN = 6;
+  public static final int PCM_JACK_ONE_OUT = 4;
+  public static final int PCM_JACK_ONE_IN = 5;
+  public static final int PCM_JACK_TWO_OUT = 7;
+  public static final int PCM_JACK_TWO_IN = 6;
 
   //PWM Ports
   public static final int PWM_CAMERA_TILT = 0;

@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatchmanipulator;
+package frc.robot.commands.hab;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
@@ -13,22 +13,22 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class PopAndDeposit extends InstantCommand {
+public class StepOneOut extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public PopAndDeposit() {
+  public StepOneOut() {
     super();
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.mHatchManipulator);
+    // eg. requires(chassis);
+    requires(Robot.mClimber);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.mHatchManipulator.clampHatch();
-    Robot.mHatchManipulator.pop();
 
+    Robot.mClimber.popStepOneOut();
   }
 
 }
