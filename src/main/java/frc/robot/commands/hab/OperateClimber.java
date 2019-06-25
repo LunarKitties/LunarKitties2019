@@ -30,6 +30,8 @@ public class OperateClimber extends Command {
 
      if(!Robot.mClimber.isLatched()) {
       Robot.mClimber.movePivot(pivot);
+     } else {
+       Robot.mClimber.movePivot(0);
      }
   }
 

@@ -30,7 +30,7 @@ public class ProcessCargo extends CommandGroup {
     addSequential(new WaitCommand(.5));
     addSequential(new MoveLiftToBottom(),3);
     addSequential(new RaiseTiltToTop(),3);  
-    addParallel(new SetTiltLatch());  
+    addParallel(new SetTiltLatch(),1);  
     SmartDashboard.putBoolean("Processing Cargo", Robot.processingCargo);
   }
 

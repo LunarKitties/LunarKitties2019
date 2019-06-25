@@ -22,13 +22,16 @@ public class RaiseTiltToTop extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.mTilt.unlatch();
+    Robot.mTilt.run(1);
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.mTilt.run(1);
+    Robot.mTilt.unlatch();
+    Robot.mTilt.run(.75);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -49,5 +52,6 @@ public class RaiseTiltToTop extends Command {
   @Override
   protected void interrupted() {
     Robot.mTilt.stop();
+    Robot.processingCargo = false;
   }
 }
